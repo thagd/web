@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.ufscar.dc.dsw.Locadora;
 import br.ufscar.dc.dsw.dao.LocadoraDAO;
 
-@WebServlet(urlPatterns = { "/locadoras/*" , "index.jsp" })
+@WebServlet(urlPatterns = { "/locadoras/*" })
 public class LocadoraController extends HttpServlet {
 
     private static final long serialVersionUID = 1L; 
@@ -41,10 +41,10 @@ public class LocadoraController extends HttpServlet {
     		throws ServletException, IOException {
         List<Locadora> listaLocadoras = dao.getAll();
         request.setAttribute("listaLocadoras", listaLocadoras);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/lista.jsp");
         dispatcher.forward(request, response);
     }
-/*
+    /*
     private Map<Long, String> getEditoras() {
         Map <Long,String> editoras = new HashMap<>();
         for (Editora editora: new EditoraDAO().getAll()) {

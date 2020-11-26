@@ -17,3 +17,20 @@
   cursor: pointer;
   background-color: #008CBA;
 }
+
+#box {
+    width: 300px;
+    min-height: 400px;
+    max-height: 1000px;
+    border-style: solid;
+    border-color: #A0522D;
+    border-width: thin;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    color: #CD853F;
+    font-family: sans-serif;
+    font-weight: bold;
+    background-color: #F5F5DC;
+}

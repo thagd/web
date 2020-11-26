@@ -11,24 +11,23 @@
 		String contextPath = request.getContextPath().replace("/", "");
 	%>
 	<div align="center">
-		<h1>Gerenciamento de Livros</h1>
+		<h1>Lista de Locadoras</h1>
 	</div>
 
-	<div align="center">
+	<div id="box" align="center" >
 		<table border="1">
-			<caption>Lista de Locadoras</caption>
 			<tr>
 				<th>ID</th>
 				<th>Nome</th>
 				<th>Cidade</th>
 				<th>Email</th>
 			</tr>
-			<c:forEach var="locadora" items="${requestScope.listaLocadoras}">
+			<c:forEach var="loc" items="${requestScope.listaLocadoras}">
 				<tr>
-					<td>${locadora.id}</td>
-					<td>${locadora.nome}</td>
-					<td>${locadora.cidade}</td>
-					<td>${locadora.email}</td>
+					<td>${loc.id}</td>
+					<td>${loc.nome}</td>
+					<td>${loc.cidade}</td>
+					<td>${loc.email}</td>
 				</tr>
 			</c:forEach>
 		</table>

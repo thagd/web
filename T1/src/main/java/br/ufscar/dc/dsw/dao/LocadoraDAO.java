@@ -32,7 +32,7 @@ public class LocadoraDAO extends GenericDAO {
     
     public List<Locadora> getAll() {   
         List<Locadora> listaLocadoras = new ArrayList<>();
-        String sql = "SELECT * from Locadora";
+        String sql = "SELECT * FROM Locadora l ORDER BY l.nome";
         try {
             Connection conn = this.getConnection();
             Statement statement = conn.createStatement();

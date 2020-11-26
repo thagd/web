@@ -4,3 +4,33 @@
     border: 1px solid red;
     background-color: beige;
 }
+
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: #008CBA;
+}
+
+#box {
+    width: 300px;
+    min-height: 400px;
+    max-height: 1000px;
+    border-style: solid;
+    border-color: #A0522D;
+    border-width: thin;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    color: #CD853F;
+    font-family: sans-serif;
+    font-weight: bold;
+    background-color: #F5F5DC;
+}

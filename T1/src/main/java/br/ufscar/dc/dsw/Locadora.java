@@ -1,13 +1,15 @@
 package br.ufscar.dc.dsw;
 
+import java.util.List;
+
 public class Locadora{
-	private int id;
+	private long id;
 	private String nome;
 	private String cidade;
 	private String email;
 	private String senha;
 	
-	public Locadora(int id, String nome, String cidade, String email, String senha) {
+	public Locadora(long id, String nome, String cidade, String email, String senha) {
 		this.id = id;
 		this.nome = nome;
 		this.cidade = cidade;
@@ -15,7 +17,7 @@ public class Locadora{
 		this.senha = senha;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	
@@ -50,5 +52,4 @@ public class Locadora{
 	public String getSenha() {
 		return senha;
 	}
-
 }

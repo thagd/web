@@ -28,7 +28,7 @@ public class UsuarioController extends HttpServlet {
     	if (usuario == null) {
     		response.sendRedirect(request.getContextPath());
     	} else if (usuario.getPapel().equals("USER")) {
-    		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/usuario/index.jsp");
+    		RequestDispatcher dispatcher = request.getRequestDispatcher("/logado/usuario/configpage.jsp");
             dispatcher.forward(request, response);
     	} else {
     		erros.add("Acesso não autorizado!");

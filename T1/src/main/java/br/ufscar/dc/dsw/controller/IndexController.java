@@ -54,7 +54,7 @@ public class IndexController extends HttpServlet {
 		}
 		request.getSession().invalidate();
 		request.setAttribute("mensagens", erros);
-		String URL = "/locadora/lista.jsp";
+		String URL = "/login.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(URL);
 		rd.forward(request, response);
 	}

@@ -6,11 +6,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Autenticação de Usuário</title>
+        <title>Locadora Virtual</title>
         <link href="${pageContext.request.contextPath}/layout.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Autenticação de Usuário</h1>
+        <h1>Locadora Virtual</h1>
         <c:if test="${mensagens.existeErros}">
             <div id="erro">
                 <ul>
@@ -38,5 +38,8 @@
                 </tr>
             </table>
         </form>
-    </body>
-</html>
+        <h3>
+			<a href="${pageContext.request.contextPath}/locadoras/lista.jsp">Listar locadoras</a>
+		</h3>
+	</body>
+	</html>

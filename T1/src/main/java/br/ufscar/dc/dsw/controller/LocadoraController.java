@@ -30,18 +30,39 @@ public class LocadoraController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {           
-        try {
-    		lista(request, response);
-        } catch (RuntimeException | IOException | ServletException e) {
-            throw new ServletException(e);
-        }
-    }
+		String action = request.getPathInfo();
+		if (action == null) {
+			action = "";
+		}
+		try {
+			switch (action) {
+			case "/lista":
+				lista(request, response);
+				break;
+			case "/listaCidade":
+				buscaCidade(request, response);
+				break;
+			}
+		} catch (RuntimeException | IOException | ServletException e) {
+			throw new ServletException(e);
+		}
+
+	}
 
     private void lista(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
         List<Locadora> listaLocadoras = dao.getAll();
         request.setAttribute("listaLocadoras", listaLocadoras);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/lista.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    private void buscaCidade(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
+    	String cidade = request.getParameter("cidade");
+        List<Locadora> listaLocadoras = dao.getbyCidade(cidade);
+        request.setAttribute("listaCidade", listaLocadoras);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/listaCidade.jsp");
         dispatcher.forward(request, response);
     }
     /*

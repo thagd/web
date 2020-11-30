@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.ufscar.dc.dsw.Locadora;
 import br.ufscar.dc.dsw.dao.LocadoraDAO;
 
-@WebServlet(urlPatterns = { "/locadoras/*" })
+@WebServlet(urlPatterns = { "/locadora/*" })
 public class LocadoraController extends HttpServlet {
 
     private static final long serialVersionUID = 1L; 
@@ -30,22 +30,31 @@ public class LocadoraController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {           
-		String action = request.getPathInfo();
-		if (action == null) {
-			action = "";
+    	try {
+			lista(request, response);
+			
+		} catch (ServletException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		try {
-			switch (action) {
-			case "/lista":
-				lista(request, response);
-				break;
-			case "/listaCidade":
-				buscaCidade(request, response);
-				break;
-			}
-		} catch (RuntimeException | IOException | ServletException e) {
-			throw new ServletException(e);
-		}
+    	
+//		String action = request.getPathInfo();
+//		if (action == null) {
+//			action = "";
+//		}
+//		try {
+//			switch (action) {
+//			case "/lista":
+//				lista(request, response);
+//				break;
+//			case "/listaCidade":
+//				buscaCidade(request, response);
+//				break;
+//			}
+//		} catch (RuntimeException | IOException | ServletException e) {
+//			throw new ServletException(e);
+//		}
 
 	}
 
@@ -57,7 +66,7 @@ public class LocadoraController extends HttpServlet {
         dispatcher.forward(request, response);
     }
     
-    private void buscaCidade(HttpServletRequest request, HttpServletResponse response) 
+    /*private void buscaCidade(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
     	String cidade = request.getParameter("cidade");
         List<Locadora> listaLocadoras = dao.getbyCidade(cidade);
@@ -65,7 +74,7 @@ public class LocadoraController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/listaCidade.jsp");
         dispatcher.forward(request, response);
     }
-    /*
+   
     private Map<Long, String> getEditoras() {
         Map <Long,String> editoras = new HashMap<>();
         for (Editora editora: new EditoraDAO().getAll()) {

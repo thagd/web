@@ -11,7 +11,7 @@ import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.Usuario;
 import br.ufscar.dc.dsw.util.Erro;
 
-@WebServlet(name = "Index", urlPatterns = { "/index.jsp" })
+@WebServlet(name = "Index", urlPatterns = { "/index.jsp", "/logout.jsp" })
 public class IndexController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

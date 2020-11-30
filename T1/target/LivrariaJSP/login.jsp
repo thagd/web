@@ -20,7 +20,7 @@
                 </ul>
             </div>
         </c:if>
-        <form method="post" action="configpage.jsp">
+        <form method="post" action="index.jsp">
             <table>
                 <tr>
                     <th>Login: </th>
@@ -38,8 +38,7 @@
                 </tr>
             </table>
         </form>
-        <h3>
-			<a href="${pageContext.request.contextPath}/locadoras/lista.jsp">Listar locadoras</a>
-		</h3>
-	</body>
-	</html>
+        <a href="${pageContext.request.contextPath}/locadora/lista">Listar locadoras</a>
+        </body>
+        </html>
+       

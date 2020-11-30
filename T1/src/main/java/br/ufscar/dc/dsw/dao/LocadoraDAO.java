@@ -135,7 +135,7 @@ public class LocadoraDAO extends GenericDAO {
         return locadora;
     }
     
-    public List getbyCidade(String cidade) {
+    public List<Locadora> getbyCidade(String cidade) {
     	List<Locadora> listaLocadoras = new ArrayList<>();
         String sql = "SELECT * from Locadora WHERE cidade = ? ORDER BY nome";
         try {

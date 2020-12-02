@@ -14,5 +14,6 @@
                 <a href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
             </li>
         </ul>
+        <a href="${pageContext.request.contextPath}/locadoras/cadastro">Adicione Nova Locadora</a>
     </body>
 </html>

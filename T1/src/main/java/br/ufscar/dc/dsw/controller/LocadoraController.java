@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.ufscar.dc.dsw.Locadora;
 import br.ufscar.dc.dsw.dao.LocadoraDAO;
 
-@WebServlet(urlPatterns = { "/locadora/*" })
+@WebServlet(name = "Index", urlPatterns = { "/index.jsp", "/locadoras/*" })
 public class LocadoraController extends HttpServlet {
 
     private static final long serialVersionUID = 1L; 
@@ -39,22 +39,23 @@ public class LocadoraController extends HttpServlet {
 			e.printStackTrace();
 		}
     	
-//		String action = request.getPathInfo();
-//		if (action == null) {
-//			action = "";
-//		}
-//		try {
-//			switch (action) {
-//			case "/lista":
-//				lista(request, response);
-//				break;
-//			case "/listaCidade":
-//				buscaCidade(request, response);
-//				break;
-//			}
-//		} catch (RuntimeException | IOException | ServletException e) {
-//			throw new ServletException(e);
-//		}
+        String action = request.getPathInfo();
+        if (action == null) {
+            action = "";
+        }
+        try {
+            switch (action) {
+                case "/lista":
+                    lista(request, response);
+                    break;
+                case "/listaCidade":
+                    //buscaCidade(request, response);
+                    break;
+            }
+            lista(request, response);
+        } catch (RuntimeException | IOException | ServletException e) {
+            throw new ServletException(e);
+        }
 
 	}
 
@@ -62,7 +63,7 @@ public class LocadoraController extends HttpServlet {
     		throws ServletException, IOException {
         List<Locadora> listaLocadoras = dao.getAll();
         request.setAttribute("listaLocadoras", listaLocadoras);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/lista.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadora/lista.jsp");
         dispatcher.forward(request, response);
     }
     

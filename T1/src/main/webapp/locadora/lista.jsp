@@ -7,30 +7,20 @@
 <title>Locação de Bikes</title>
 </head>
 <body>
+	<jsp:include page="../menu.jsp"/>
 	<%
 		String contextPath = request.getContextPath().replace("/", "");
 	%>
-	<div align="center">
-		<h1>Lista de Locadoras</h1>
-	</div>
-
-	<div id="box" align="center" >
-		<table border="1">
-			<tr>
-				<th>ID</th>
-				<th>Nome</th>
-				<th>Cidade</th>
-				<th>Email</th>
-			</tr>
+	<div class="container-page">
+		<h1 align="center">Lista de Locadoras</h1>
+		<div align="center">
 			<c:forEach var="loc" items="${requestScope.listaLocadoras}">
-				<tr>
-					<td>${loc.id}</td>
-					<td>${loc.nome}</td>
-					<td>${loc.cidade}</td>
-					<td>${loc.email}</td>
-				</tr>
+				<div class="container-lista" >
+					<div class="title-card">${loc.nome}</div>
+					${loc.cidade}
+				</div>
 			</c:forEach>
-		</table>
+		</div>
 	</div>
 </body>
 </html>

@@ -1,3 +1,9 @@
+/* all */
+.container-page {
+  padding-top: 84px;
+}
+
+/* login */
 #erro {
     width: 80%;
     margin: 0 auto;
@@ -33,4 +39,61 @@
     font-family: sans-serif;
     font-weight: bold;
     background-color: #F5F5DC;
+}
+
+/* menu */
+.container-menu {
+  background-color: white;
+  width: 100%;
+  height: 74px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  position: fixed;
+  margin: -8px;
+}
+
+.container-button-login {
+  padding: 12px;
+  margin-left: 16px;
+  margin-right: 32px;
+  background-color: #836FFF;
+  color: white;
+  border-radius: 4px;
+}
+
+.container-button-signup {
+  padding: 12px;
+  border: 1px solid #836FFF;
+  background-color: white;
+  color: #836FFF;
+  border-radius: 4px;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.logo {
+  color: #836FFF;
+  font-family: 'Star Wars';
+}
+
+/* lista */
+.container-lista {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  padding: 16px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  border-radius: 8px;
+  width: 480px;
+  text-align: left;
+}
+
+.title-card {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 4px;
 }

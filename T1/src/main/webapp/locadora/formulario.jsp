@@ -9,19 +9,16 @@
 <body>
 	<div align="center">
 		<h1>Gerenciamento de Locadoras</h1>
-		<h2>
-			<a href="/locadora/listaadmin">Lista de Livros</a>
-		</h2>
 	</div>
 	<div align="center">
 		<c:choose>
 			<c:when test="${locadora != null}">
-				<form action="/locadoras/atualizacao" method="post">
+				<form action="${pageContext.request.contextPath}/locadoras/atualizacao" method="post">
 					<%@include file="/locadora/campos.jsp"%>
 				</form>
 			</c:when>
 			<c:otherwise>
-				<form action="/locadoras/insercao" method="post">
+				<form action="${pageContext.request.contextPath}/locadoras/insercao" method="post">
 					<%@include file="/locadora/campos.jsp"%></form>
 			</c:otherwise>
 		</c:choose>

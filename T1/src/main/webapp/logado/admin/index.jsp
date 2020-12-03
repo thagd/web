@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,6 +15,6 @@
                 <a href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
             </li>
         </ul>
-        <a href="${pageContext.request.contextPath}/locadoras/cadastro">Adicione Nova Locadora</a>
+		<a href="${pageContext.request.contextPath}/locadoras/listaadmin">Gerenciamento de Locadoras</a>
     </body>
 </html>

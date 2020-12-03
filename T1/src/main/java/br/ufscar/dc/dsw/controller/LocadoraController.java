@@ -32,16 +32,7 @@ public class LocadoraController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {           
-    	try {
-			lista(request, response);
-			
-		} catch (ServletException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String action = request.getPathInfo();
         if (action == null) {
             action = "";
@@ -51,22 +42,26 @@ public class LocadoraController extends HttpServlet {
                 case "/lista":
                     lista(request, response);
                     break;
-                case "/lista_admin":
+                case "/listaadmin":
                     lista_admin(request, response);
                 case "/listaCidade":
                     //buscaCidade(request, response);
                     break;
                 case "/cadastro":
                 	apresentaFormCadastro(request, response);
+                    break;
+                case "/edicao":
+                	apresentaFormEdicao(request, response);
                 	break;
                 case "/atualizacao":
                 	atualize(request, response);
                 	break;
                 case "/insercao":
                 	insere(request, response);
-                	break;
+                    break;
+                default:
+                    lista(request, response);
             }
-            lista(request, response);
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
@@ -113,7 +108,8 @@ public class LocadoraController extends HttpServlet {
         
         Locadora locadora = new Locadora(nome, cidade, email, senha);
         dao.insert(locadora);
-        response.sendRedirect("/locadora/listaadmin.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadora/listaadmin.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -127,7 +123,15 @@ public class LocadoraController extends HttpServlet {
         
         Locadora locadora = new Locadora(id, nome, cidade, email, senha);
         dao.update(locadora);
-        response.sendRedirect("/locadora/lista_admin");
+        response.sendRedirect("listaadmin");
+    }
+
+    private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        Locadora locadora = dao.get(id);
+        request.setAttribute("locadora", locadora);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadora/formulario.jsp");
+        dispatcher.forward(request, response);
     }
     
     /*   
@@ -137,19 +141,7 @@ public class LocadoraController extends HttpServlet {
             editoras.put(editora.getId(), editora.getNome());
         }
         return editoras;
-    }
-    
-
-    private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        Livro livro = dao.get(id);
-        request.setAttribute("livro", livro);
-        request.setAttribute("editoras", getEditoras());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/livro/formulario.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    
+    }   
 
     private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long id = Long.parseLong(request.getParameter("id"));

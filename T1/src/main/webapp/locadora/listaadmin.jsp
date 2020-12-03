@@ -13,13 +13,12 @@ String contextPath = request.getContextPath().replace("/", "");
 	<div align="center">
 		<h1>Gerenciamento de Livros</h1>
 		<h2>
-			<a href="/${pageContext.request.contextPath}">Menu Principal</a> &nbsp;&nbsp;&nbsp; <a
-				href="/${pageContext.request.contextPath}/locadoras/cadastro">Adicione Novo Livro</a>
+			<a href="${pageContext.request.contextPath}/admin/">Menu Principal</a> &nbsp;&nbsp;&nbsp; <a href="${pageContext.request.contextPath}/locadoras/cadastro">Adicione Nova Locadora</a>
 		</h2>
 	</div>
 	<div align="center">
 		<table border="1">
-			<caption>Lista de Livros</caption>
+			<caption>Lista de Locadoras</caption>
 			<tr>
 				<th>ID</th>
 				<th>Nome</th>
@@ -27,14 +26,14 @@ String contextPath = request.getContextPath().replace("/", "");
 				<th>Email</th>
 				<th>Senha</th>
 			</tr>
-			<c:forEach var="livro" items="${requestScope.listaLivros}">
+			<c:forEach var="locadora" items="${requestScope.listaLocadoras}">
 				<tr>
 					<td>${locadora.id}</td>
 					<td>${locadora.nome}</td>
 					<td>${locadora.cidade}</td>
 					<td>${locadora.email}</td>
 					<td>${locadora.senha}</td>
-					<td><a href="/${pageContext.request.contextPath}/locadoras/edicao?
+					<td><a href="${pageContext.request.contextPath}/locadoras/edicao?
 id=${locadora.id}">Edição</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; 
 						<!-- <a href="/${pageContext.request.contextPath}/locadoras/remocao?

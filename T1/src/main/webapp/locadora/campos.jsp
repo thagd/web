@@ -24,7 +24,7 @@ Cadastro
 	<tr>
 		<td><label for="cidade">Cidade</label></td>
 		<td><input type="text" id="cidade" name="cidade" size="20" required
-			value="${locadora.autor}" /></td>
+			value="${locadora.cidade}" /></td>
 	</tr>
 	<tr>
 		<td><label for="email">Email</label></td>
@@ -33,7 +33,7 @@ Cadastro
 	</tr>
 	<tr>
 		<td><label for="senha">Senha</label></td>
-		<td><input type="text" id="senha" name="senha" required size="5" 
+		<td><input type="text" id="senha" name="senha" required size="8" maxlength="8"
 			value="${locadora.senha}" /></td>
 	</tr>
 	<tr>

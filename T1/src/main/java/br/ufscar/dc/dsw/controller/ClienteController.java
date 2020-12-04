@@ -12,18 +12,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.ufscar.dc.dsw.Cliente;
-import br.ufscar.dc.dsw.dao.ClienteDAO;
+import br.ufscar.dc.dsw.Usuario;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
 
 @WebServlet(urlPatterns = {"/clientes/*" })
 public class ClienteController extends HttpServlet {
 
     private static final long serialVersionUID = 1L; 
-    private ClienteDAO dao;
+    private UsuarioDAO dao;
 
     @Override
     public void init() {
-        dao = new ClienteDAO();
+        dao = new UsuarioDAO();
     }
 
     @Override
@@ -38,6 +39,7 @@ public class ClienteController extends HttpServlet {
             action = "";
         }
         try {
+        	System.out.println(action);
             switch (action) {
                 case "/listaadmin":
                     lista_admin(request, response);
@@ -56,26 +58,25 @@ public class ClienteController extends HttpServlet {
                 case "/remocao":
                 	remove(request, response);
                     break;
-                default:
-                    lista(request, response);
             }
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
 
     }
+
     
     private void lista_admin(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
-        List<Cliente> listaClientes = dao.getAll();
+        List<Usuario> listaClientes = dao.getAllClientes();
         request.setAttribute("listaClientes", listaClientes);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/listaadmin.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/listaadminCliente.jsp");
         dispatcher.forward(request, response);
     }
     
     private Map<Long, String> getClientes() {
         Map <Long,String> clientes = new HashMap<>();
-        for (Cliente cliente: new ClienteDAO().getAll()) {
+        for (Usuario cliente: new UsuarioDAO().getAllClientes()) {
             clientes.put(cliente.getId(), cliente.getNome());
         }
         return clientes;
@@ -93,10 +94,11 @@ public class ClienteController extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
+        String papel = request.getParameter("papel");
         
-        Cliente cliente = new Cliente(nome, email, senha);
+        Usuario cliente = new Usuario(nome, email, senha, papel);
         dao.insert(cliente);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/listaadmin.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("listaadmin");
         dispatcher.forward(request, response);
     }
 
@@ -107,15 +109,16 @@ public class ClienteController extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
+        String papel = request.getParameter("papel");
         
-        Cliente cliente = new Cliente(id, nome, email, senha);
+        Usuario cliente = new Usuario(id, nome, email, senha, papel);
         dao.update(cliente);
         response.sendRedirect("listaadmin");
     }
 
     private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        Cliente cliente = dao.get(id);
+        Usuario cliente = dao.getbyID(id);
         request.setAttribute("cliente", cliente);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/formulario.jsp");
         dispatcher.forward(request, response);
@@ -124,7 +127,7 @@ public class ClienteController extends HttpServlet {
     private void remove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
 
-        Cliente cliente = new Cliente(id);
+        Usuario cliente = new Usuario(id);
         dao.delete(cliente);
         response.sendRedirect("listaadmin");
     }

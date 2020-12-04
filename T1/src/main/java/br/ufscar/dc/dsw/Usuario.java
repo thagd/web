@@ -6,6 +6,7 @@ public class Usuario {
 	private String login;
 	private String senha;
 	private String papel;
+	private String cidade;
 	
 	public Usuario(Long id, String nome, String login, String senha, String papel) {
 		super();
@@ -16,12 +17,36 @@ public class Usuario {
 		this.papel = papel;
 	}
 	
+	public Usuario(Long id, String nome, String login, String senha, String papel, String cidade) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.login = login;
+		this.senha = senha;
+		this.papel = papel;
+		this.cidade = cidade;
+	}
+	
 	public Usuario(String nome, String login, String senha, String papel) {
 		super();
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
 		this.papel = papel;
+	}
+	
+	public Usuario(String nome, String login, String senha, String papel, String cidade) {
+		super();
+		this.nome = nome;
+		this.login = login;
+		this.senha = senha;
+		this.papel = papel;
+		this.cidade = cidade;
+	}
+	
+	public Usuario (Long id) {
+		super();
+		this.id = id;
 	}
 	
 	public Long getId() {
@@ -54,6 +79,13 @@ public class Usuario {
 	}
 	public void setPapel(String papel) {
 		this.papel = papel;
+	}
+	
+	public String getCidade() {
+		return cidade;
+	}
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 
 }

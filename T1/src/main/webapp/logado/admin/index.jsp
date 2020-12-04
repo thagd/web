@@ -14,7 +14,13 @@
             <li>
                 <a href="${pageContext.request.contextPath}/logout.jsp">Sair</a>
             </li>
+            <li>
+            	<a href="${pageContext.request.contextPath}/locadoras/listaadmin">Gerenciamento de Locadoras</a>
+			</li>
+			<li>
+				<a href="${pageContext.request.contextPath}/clientes/listaadmin">Gerenciamento de Usuários</a>
+        	</li>
         </ul>
-		<a href="${pageContext.request.contextPath}/locadoras/listaadmin">Gerenciamento de Locadoras</a>
+		
     </body>
 </html>

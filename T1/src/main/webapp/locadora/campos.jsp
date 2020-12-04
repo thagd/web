@@ -6,10 +6,10 @@
 	<caption>
 		<c:choose>
 			<c:when test="${locadora != null}">
-Edição
+Edição de Locadora
 </c:when>
 			<c:otherwise>
-Cadastro
+Cadastro de Locadoras
 </c:otherwise>
 		</c:choose>
 	</caption>
@@ -29,7 +29,7 @@ Cadastro
 	<tr>
 		<td><label for="email">Email</label></td>
 		<td><input type="text" id="email" name="email" size="30" required
-			value="${locadora.email}" /></td>
+			value="${locadora.login}" /></td>
 	</tr>
 	<tr>
 		<td><label for="senha">Senha</label></td>
@@ -37,6 +37,7 @@ Cadastro
 			value="${locadora.senha}" /></td>
 	</tr>
 	<tr>
+		<input type="hidden" name="papel" value="LOCADORA" />
 		<td colspan="2" align="center"><input type="submit" value="Salva" /></td>
 	</tr>
 </table>

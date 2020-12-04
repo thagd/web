@@ -4,16 +4,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<title>Livraria Virtual</title>
+<title>Locadora Virtual</title>
 </head>
 <body>
 	<%
 String contextPath = request.getContextPath().replace("/", "");
 %>
 	<div align="center">
-		<h1>Gerenciamento de Livros</h1>
+		<h1>Gerenciamento de Locadoras</h1>
 		<h2>
-			<a href="${pageContext.request.contextPath}/admin/">Menu Principal</a> &nbsp;&nbsp;&nbsp; <a href="${pageContext.request.contextPath}/locadoras/cadastro">Adicione Nova Locadora</a>
+			<a href="${pageContext.request.contextPath}/admin/">Menu Admin</a> &nbsp;&nbsp;&nbsp; 
+			<a href="${pageContext.request.contextPath}/locadoras/cadastro">Adicione Nova Locadora</a>
 		</h2>
 	</div>
 	<div align="center">
@@ -31,7 +32,7 @@ String contextPath = request.getContextPath().replace("/", "");
 					<td>${locadora.id}</td>
 					<td>${locadora.nome}</td>
 					<td>${locadora.cidade}</td>
-					<td>${locadora.email}</td>
+					<td>${locadora.login}</td>
 					<td>${locadora.senha}</td>
 					<td><a href="${pageContext.request.contextPath}/locadoras/edicao?id=${locadora.id}">Edição</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; 

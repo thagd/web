@@ -12,6 +12,12 @@
 		String contextPath = request.getContextPath().replace("/", "");
 	%>
 	<div class="container-page">
+		<form action="${pageContext.request.contextPath}/locadoras/listaCidade" method="post">
+			<label for="cidade">Cidade</label>
+			<input type="text" id="cidade" name="cidade" required size="30" maxlength="30"/>
+			<input type="submit" value="Buscar" />
+		</form>
+		
 		<h1 align="center">Lista de Locadoras</h1>
 		<div align="center">
 			<c:forEach var="loc" items="${requestScope.listaLocadoras}">

@@ -39,7 +39,6 @@ public class ClienteController extends HttpServlet {
             action = "";
         }
         try {
-        	System.out.println(action);
             switch (action) {
                 case "/listaadmin":
                     lista_admin(request, response);

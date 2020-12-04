@@ -74,7 +74,6 @@ public class LocadoraController extends HttpServlet {
     private void buscaCidade(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
     	String cidade = request.getParameter("cidade");	
-    	System.out.println(cidade);
     	List<Usuario> listaLocadoras = dao.getLocadoraByCidade(cidade);
         request.setAttribute("listaLocadoras", listaLocadoras);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locadora/listaCidade.jsp");

@@ -10,34 +10,28 @@
         <link href="${pageContext.request.contextPath}/layout.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <h1>Locadora Virtual</h1>
-        <c:if test="${mensagens.existeErros}">
-            <div id="erro">
-                <ul>
-                    <c:forEach var="erro" items="${mensagens.erros}">
-                        <li> ${erro} </li>
-                    </c:forEach>
-                </ul>
+        <jsp:include page="menu.jsp"/>
+        <div class="container-page">
+            <h1 align="center">Locadora Virtual</h1>
+            <div align="center">
+            <c:if test="${mensagens.existeErros}">
+                <div id="erro">
+                    <ul>
+                        <c:forEach var="erro" items="${mensagens.erros}">
+                            <div> ${erro} </div>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </c:if>
+            <form method="post" action="log.jsp">
+                <label class='text-formulario'>Login</label><br/>
+                <input class='input' type="text" name="login" value="${param.login}"/><br/>
+                <label class='text-formulario'>Senha</label><br/>
+                <input class='input' type="password" name="senha" /><br/>
+                <input type="submit" name="bOK" value="Entrar"/><br/>
+            </form>
             </div>
-        </c:if>
-        <form method="post" action="log.jsp">
-            <table>
-                <tr>
-                    <th>Login: </th>
-                    <td><input type="text" name="login"
-                               value="${param.login}"/></td>
-                </tr>
-                <tr>
-                    <th>Senha: </th>
-                    <td><input type="password" name="senha" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"> 
-                        <input type="submit" name="bOK" value="Entrar"/>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        </div>
         </body>
         </html>
        

@@ -33,14 +33,9 @@ String contextPath = request.getContextPath().replace("/", "");
 					<td>${locadora.cidade}</td>
 					<td>${locadora.email}</td>
 					<td>${locadora.senha}</td>
-					<td><a href="${pageContext.request.contextPath}/locadoras/edicao?
-id=${locadora.id}">Edição</a>
+					<td><a href="${pageContext.request.contextPath}/locadoras/edicao?id=${locadora.id}">Edição</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; 
-						<!-- <a href="/${pageContext.request.contextPath}/locadoras/remocao?
-id=${locadora.id}"
-						onclick="return confirm('Tem certeza de que deseja
-excluir este item?');">
-							Remoção </a></td>-->
+						<a href="${pageContext.request.contextPath}/locadoras/remocao?id=${locadora.id}" onclick="return confirm('Tem certeza de que deseja excluir este item?');">Remoção </a></td>
 				</tr>
 			</c:forEach>
 		</table>

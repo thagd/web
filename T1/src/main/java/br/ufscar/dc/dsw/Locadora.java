@@ -23,6 +23,10 @@ public class Locadora{
 		this.email = email;
 		this.senha = senha;
 	}
+
+	public Locadora(long id) {
+		this.id = id;
+	}
 	
 	public long getId() {
 		return id;

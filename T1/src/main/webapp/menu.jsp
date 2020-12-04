@@ -13,7 +13,6 @@
         <div class="container-menu">
             <a href="${pageContext.request.contextPath}/index.jsp"><h3 class="logo">Aluga Bike</h3></a>
             <div class="container-button-menu">
-                <a class="container-button-signup" href="${pageContext.request.contextPath}/log.jsp">Sign up</a>
                 <a class="container-button-login" href="${pageContext.request.contextPath}/log.jsp">Login</a>
             </div>
         </div>

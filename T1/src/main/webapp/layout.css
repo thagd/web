@@ -5,10 +5,9 @@
 
 /* login */
 #erro {
-    width: 80%;
+    width: 300px;
     margin: 0 auto;
     border: 1px solid red;
-    background-color: beige;
 }
 
 .button {
@@ -39,6 +38,18 @@
     font-family: sans-serif;
     font-weight: bold;
     background-color: #F5F5DC;
+}
+
+.text-formulario {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.input {
+  margin-bottom: 16px;
+  width: 100px;
+  outline: 0;
+  border-color: dimgrey;
 }
 
 /* menu */

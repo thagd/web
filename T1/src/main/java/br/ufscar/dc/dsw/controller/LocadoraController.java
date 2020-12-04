@@ -59,6 +59,9 @@ public class LocadoraController extends HttpServlet {
                 case "/insercao":
                 	insere(request, response);
                     break;
+                case "/remocao":
+                	remove(request, response);
+                    break;
                 default:
                     lista(request, response);
             }
@@ -133,6 +136,14 @@ public class LocadoraController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/locadora/formulario.jsp");
         dispatcher.forward(request, response);
     }
+
+    private void remove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+
+        Locadora locadora = new Locadora(id);
+        dao.delete(locadora);
+        response.sendRedirect("listaadmin");
+    }
     
     /*   
     private Map<Long, String> getEditoras() {
@@ -141,13 +152,5 @@ public class LocadoraController extends HttpServlet {
             editoras.put(editora.getId(), editora.getNome());
         }
         return editoras;
-    }   
-
-    private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-
-        Livro livro = new Livro(id);
-        dao.delete(livro);
-        response.sendRedirect("lista");
-    }*/
+    }   */
 }

@@ -1,7 +1,10 @@
 package br.ufscar.dc.dsw.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,18 +12,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.ufscar.dc.dsw.Locadora;
-import br.ufscar.dc.dsw.dao.LocadoraDAO;
+import br.ufscar.dc.dsw.Usuario;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
 
-@WebServlet(urlPatterns = { "/locadoras/*" })
+@WebServlet(name = "Index", urlPatterns = { "/index.jsp", "/locadoras/*" })
 public class LocadoraController extends HttpServlet {
 
     private static final long serialVersionUID = 1L; 
-    private LocadoraDAO dao;
+    private UsuarioDAO dao;
 
     @Override
     public void init() {
-        dao = new LocadoraDAO();
+        dao = new UsuarioDAO();
     }
 
     @Override
@@ -29,83 +32,127 @@ public class LocadoraController extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {           
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {    	
+        String action = request.getPathInfo();
+        if (action == null) {
+            action = "";
+        }
         try {
-    		lista(request, response);
+            switch (action) {
+                case "/lista":
+                    lista(request, response);
+                    break;
+                case "/listaadmin":
+                    lista_admin(request, response);
+                case "/listaCidade":
+                    buscaCidade(request, response);
+                    break;
+                case "/cadastro":
+                	apresentaFormCadastro(request, response);
+                	break;
+                case "/atualizacao":
+                	atualize(request, response);
+                	break;
+                case "/insercao":
+                	insere(request, response);
+                	break;
+                case "/remocao":
+                	remove(request, response);
+                	break;
+                case "/edicao":
+                	apresentaFormEdicao(request, response);
+                default:
+                	lista(request, response);
+            }
+            lista(request, response);
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
-    }
 
-    private void lista(HttpServletRequest request, HttpServletResponse response) 
+	}
+
+    private void buscaCidade(HttpServletRequest request, HttpServletResponse response) 
     		throws ServletException, IOException {
-        List<Locadora> listaLocadoras = dao.getAll();
+    	String cidade = request.getParameter("cidade");	
+    	List<Usuario> listaLocadoras = dao.getLocadoraByCidade(cidade);
         request.setAttribute("listaLocadoras", listaLocadoras);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/lista.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadora/listaCidade.jsp");
+        dispatcher.forward(request, response);
+	}
+
+	private void lista(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
+        List<Usuario> listaLocadoras = dao.getAllLocadoras();
+        request.setAttribute("listaLocadoras", listaLocadoras);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadora/lista.jsp");
         dispatcher.forward(request, response);
     }
-    /*
-    private Map<Long, String> getEditoras() {
-        Map <Long,String> editoras = new HashMap<>();
-        for (Editora editora: new EditoraDAO().getAll()) {
-            editoras.put(editora.getId(), editora.getNome());
+    
+    private void lista_admin(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
+        List<Usuario> listaLocadoras = dao.getAllLocadoras();
+        request.setAttribute("listaLocadoras", listaLocadoras);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadora/listaadmin.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    private Map<Long, String> getLocadoras() {
+        Map <Long,String> locadoras = new HashMap<>();
+        for (Usuario locadora: new UsuarioDAO().getAllLocadoras()) {
+            locadoras.put(locadora.getId(), locadora.getNome());
         }
-        return editoras;
+        return locadoras;
     }
     
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("editoras", getEditoras());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/livro/formulario.jsp");
+    	request.setAttribute("locadoras", getLocadoras());
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadora/formulario.jsp");
         dispatcher.forward(request, response);
     }
-
-    private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        Livro livro = dao.get(id);
-        request.setAttribute("livro", livro);
-        request.setAttribute("editoras", getEditoras());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/livro/formulario.jsp");
-        dispatcher.forward(request, response);
-    }
-
+    
     private void insere(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         
-        String titulo = request.getParameter("titulo");
-        String autor = request.getParameter("autor");
-        Integer ano = Integer.parseInt(request.getParameter("ano"));
-        Float preco = Float.parseFloat(request.getParameter("preco"));
+        String nome = request.getParameter("nome");
+        String cidade = request.getParameter("cidade");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String papel = request.getParameter("papel");
         
-        Long editoraID = Long.parseLong(request.getParameter("editora"));
-        Editora editora = new EditoraDAO().get(editoraID);
-        
-        Livro livro = new Livro(titulo, autor, ano, preco, editora);
-        dao.insert(livro);
-        response.sendRedirect("lista");
+        Usuario locadora = new Usuario(nome, email, senha, papel, cidade);
+        dao.insertLocadora(locadora);
+        response.sendRedirect("listaadmin");
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
         Long id = Long.parseLong(request.getParameter("id"));
-        String titulo = request.getParameter("titulo");
-        String autor = request.getParameter("autor");
-        Integer ano = Integer.parseInt(request.getParameter("ano"));
-        Float preco = Float.parseFloat(request.getParameter("preco"));
+        String nome = request.getParameter("nome");
+        String cidade = request.getParameter("cidade");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String papel = request.getParameter("papel");
         
-        Long editoraID = Long.parseLong(request.getParameter("editora"));
-        Editora editora = new EditoraDAO().get(editoraID);
-        
-        Livro livro = new Livro(id, titulo, autor, ano, preco, editora);
-        dao.update(livro);
-        response.sendRedirect("lista");
+        Usuario locadora = new Usuario(id, nome, email, senha, papel, cidade);
+        dao.updateLocadora(locadora);
+        response.sendRedirect("listaadmin");
     }
-
+    
+    private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        Usuario locadora = dao.getbyIDLocadora(id);
+        request.setAttribute("locadora", locadora);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadora/formulario.jsp");
+        dispatcher.forward(request, response);
+    }
+    
     private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long id = Long.parseLong(request.getParameter("id"));
 
-        Livro livro = new Livro(id);
+        Usuario livro = new Usuario(id);
         dao.delete(livro);
         response.sendRedirect("lista");
-    }*/
+    }
+    
 }

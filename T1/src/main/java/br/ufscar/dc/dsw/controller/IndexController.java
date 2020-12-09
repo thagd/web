@@ -11,7 +11,7 @@ import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.Usuario;
 import br.ufscar.dc.dsw.util.Erro;
 
-@WebServlet(name = "Index", urlPatterns = { "/index.jsp" })
+@WebServlet(urlPatterns = { "/log.jsp", "/logout.jsp" })
 public class IndexController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -54,7 +54,7 @@ public class IndexController extends HttpServlet {
 		}
 		request.getSession().invalidate();
 		request.setAttribute("mensagens", erros);
-		String URL = "/locadora/lista.jsp";
+		String URL = "/login.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(URL);
 		rd.forward(request, response);
 	}

@@ -1,7 +1,27 @@
+create database Bicicletas;
+
 use Bicicletas;
 
-create table Usuario(id bigint not null auto_increment, nome varchar(256) not null, login varchar(20) not null unique, senha varchar(64) not null, papel varchar(10), primary key (id));
+create table Usuario(
+	id bigint not null auto_increment, 
+	nome varchar(30) not null, 
+	login varchar(20) not null unique, 
+	senha varchar(64) not null, 
+	papel varchar(10), 
+	cidade varchar(30) null,
+	primary key(id)
+);
+
+create table Locacao(
+	id bigint not null auto_increment,
+	cliente varchar(30) not null, 
+	locadora varchar(20) not null, 
+	data varchar(10) not null,
+	primary key(id)
+);
 
 insert into Usuario(nome, login, senha, papel) values ('Administrador', 'admin', 'admin', 'ADMIN');
 
-insert into Usuario(nome, login, senha, papel) values ('Locadora', 'user', 'user', 'LOCADORA');
+insert into Usuario(nome, login, senha, papel) values ('LocadoraTeste', 'locadora@test', 'locadora', 'LOCADORA', 'São Carlos');
+
+insert into Usuario(nome, login, senha, papel) values ('ClienteTeste', 'cliente@test', 'user', 'CLIENTE');

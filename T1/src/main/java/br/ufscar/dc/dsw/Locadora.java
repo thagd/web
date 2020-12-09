@@ -17,6 +17,17 @@ public class Locadora{
 		this.senha = senha;
 	}
 	
+	public Locadora(String nome, String cidade, String email, String senha) {
+		this.nome = nome;
+		this.cidade = cidade;
+		this.email = email;
+		this.senha = senha;
+	}
+
+	public Locadora(long id) {
+		this.id = id;
+	}
+	
 	public long getId() {
 		return id;
 	}

@@ -13,7 +13,7 @@
     </head>
     <body>
         <div class="container-menu">
-            <a href="${pageContext.request.contextPath}/index.jsp"><img src="img/Logo.png" width="50%" height="50%"></a>
+            <img src="./Logo.png" alt="Aluga Bike" width=100>
             <div class="container-button-menu">
                 <a class="container-button-login" href="${pageContext.request.contextPath}/log.jsp">Login</a>
             </div>

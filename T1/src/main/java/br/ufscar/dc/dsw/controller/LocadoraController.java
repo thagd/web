@@ -64,7 +64,6 @@ public class LocadoraController extends HttpServlet {
                 default:
                 	lista(request, response);
             }
-            lista(request, response);
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
@@ -117,7 +116,7 @@ public class LocadoraController extends HttpServlet {
         String cidade = request.getParameter("cidade");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        String papel = request.getParameter("papel");
+        String papel = "LOCADORA";
         
         Usuario locadora = new Usuario(nome, email, senha, papel, cidade);
         dao.insertLocadora(locadora);
@@ -152,7 +151,7 @@ public class LocadoraController extends HttpServlet {
 
         Usuario livro = new Usuario(id);
         dao.delete(livro);
-        response.sendRedirect("lista");
+        response.sendRedirect("listaadmin");
     }
     
 }

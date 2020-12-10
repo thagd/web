@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufscar.dc.dsw.Usuario;
-import br.ufscar.dc.dsw.dao.UsuarioDAO;
+import br.ufscar.dc.dsw.Locacao;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
 
 @WebServlet(urlPatterns = {"/clientes/*" })
@@ -57,6 +57,11 @@ public class ClienteController extends HttpServlet {
                 case "/remocao":
                 	remove(request, response);
                     break;
+                case "/locacoes":
+                	lista_locacoes(request, response);
+                    break;
+                default:
+                	lista_admin(request, response);
             }
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
@@ -83,7 +88,7 @@ public class ClienteController extends HttpServlet {
     
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("clientes", getClientes());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("cliente/formulario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/formulario.jsp");
         dispatcher.forward(request, response);
     }
     
@@ -93,12 +98,11 @@ public class ClienteController extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        String papel = request.getParameter("papel");
+        String papel = "USER";
         
         Usuario cliente = new Usuario(nome, email, senha, papel);
         dao.insert(cliente);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("listaadmin");
-        dispatcher.forward(request, response);
+        response.sendRedirect("listaadmin");
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -129,5 +133,16 @@ public class ClienteController extends HttpServlet {
         Usuario cliente = new Usuario(id);
         dao.delete(cliente);
         response.sendRedirect("listaadmin");
+    }
+
+    private void lista_locacoes(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
+
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
+        String login = usuario.getLogin();
+        List<Locacao> listaLocacoes = dao.getAllLocacoes(login);
+        request.setAttribute("listaLocacoes", listaLocacoes);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/listaLocacoes.jsp");
+        dispatcher.forward(request, response);
     }
 }

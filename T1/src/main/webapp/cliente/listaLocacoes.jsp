@@ -10,9 +10,11 @@
 		<title><fmt:message key="cliente.listaLocacoes.title" /></title>
 	</head>
 	<body>
-		<%
-	String contextPath = request.getContextPath().replace("/", "");
-	%>
+		<jsp:include page="../menuLogout.jsp"/>
+		<div class="container-page">
+			<%
+		String contextPath = request.getContextPath().replace("/", "");
+		%>
 		<div align="center">
 			<h1><fmt:message key="cliente.listaLocacoes.management" /></h1>
 			<h2>
@@ -37,6 +39,7 @@
 					</tr>
 				</c:forEach>
 			</table>
+		</div>
 		</div>
 	</body>
     </fmt:bundle>

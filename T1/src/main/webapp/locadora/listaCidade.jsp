@@ -10,7 +10,7 @@
 		<title><fmt:message key="locadora.listaCidade.title" /></title>
 	</head>
 	<body>
-		<jsp:include page="../menu.jsp"/>
+		<jsp:include page="../menuLogado.jsp"/>
 		<%
 			String contextPath = request.getContextPath().replace("/", "");
 		%>

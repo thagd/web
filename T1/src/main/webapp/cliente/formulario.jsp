@@ -10,6 +10,8 @@
 		<title><fmt:message key="cliente.form.title" /></title>
 	</head>
 	<body>
+		<jsp:include page="../menuLogout.jsp"/>
+		<div class="container-page">
 		<div align="center">
 			<h1><fmt:message key="cliente.form.management" /></h1>
 		</div>
@@ -33,6 +35,7 @@
 				</c:forEach>
 			</ul>
 		</c:if>
+		</div>
 	</body>
 	</fmt:bundle>
 </html>

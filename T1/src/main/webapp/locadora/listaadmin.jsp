@@ -10,6 +10,8 @@
 		<title><fmt:message key="locadora.listaAdmin.title" /></title>
 	</head>
 	<body>
+		<jsp:include page="../menuLogout.jsp"/>
+		<div class="container-page">
 			<%
 		String contextPath = request.getContextPath().replace("/", "");
 		%>
@@ -43,6 +45,7 @@
 					</tr>
 				</c:forEach>
 			</table>
+		</div>
 		</div>
 	</body>
     </fmt:bundle>

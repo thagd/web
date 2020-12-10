@@ -23,13 +23,13 @@
 			
 			<h1 align="center"><fmt:message key="locadora.lista.rentalList" /></h1>
 			<div align="center">
-				<c:forEach var="loc" items="${requestScope.listaLocadoras}">
-					<div class="container-lista" >
-						<div class="title-card">${loc.nome}</div>
-						${loc.cidade}
-					</div>
-				</c:forEach>
-			</div>
+			<c:forEach var="loc" items="${requestScope.listaLocadoras}">
+				<div class="container-lista" >
+					<div class="title-card">${loc.nome}</div>
+					${loc.cidade}
+				</div>
+			</c:forEach>
+		</div>
 		</div>
 	</body>
     </fmt:bundle>

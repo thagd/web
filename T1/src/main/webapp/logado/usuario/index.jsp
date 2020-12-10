@@ -14,6 +14,9 @@
         <p>Olá ${sessionScope.usuarioLogado.nome}</p>
         <ul>
             <li>
+                <a href="${pageContext.request.contextPath}/clientes/locacoes"><fmt:message key="logado.usuario.rentals" /></a>
+            </li>
+            <li>
                 <a href="${pageContext.request.contextPath}/logout.jsp"><fmt:message key="logado.usuario.logout" /></a>
             </li>
         </ul>

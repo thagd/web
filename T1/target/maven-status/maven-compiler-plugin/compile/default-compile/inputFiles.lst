@@ -5,6 +5,7 @@
 /home/boss/Documentos/Web1/web/T1/src/main/java/br/ufscar/dc/dsw/controller/AdminController.java
 /home/boss/Documentos/Web1/web/T1/src/main/java/br/ufscar/dc/dsw/util/Erro.java
 /home/boss/Documentos/Web1/web/T1/src/main/java/br/ufscar/dc/dsw/controller/LocadoraController.java
+/home/boss/Documentos/Web1/web/T1/src/main/java/br/ufscar/dc/dsw/Locacao.java
 /home/boss/Documentos/Web1/web/T1/src/main/java/br/ufscar/dc/dsw/Usuario.java
 /home/boss/Documentos/Web1/web/T1/src/main/java/br/ufscar/dc/dsw/controller/UsuarioController.java
 /home/boss/Documentos/Web1/web/T1/src/main/java/br/ufscar/dc/dsw/dao/GenericDAO.java

@@ -14,14 +14,14 @@
         <p>Olá ${sessionScope.usuarioLogado.nome}</p>
         <ul>
             <li>
-                <a href="${pageContext.request.contextPath}/logout.jsp"><fmt:message key="logado.admin.logout" /></a>
-            </li>
-            <li>
             	<a href="${pageContext.request.contextPath}/locadoras/listaadmin"><fmt:message key="logado.admin.rentalManagement" /></a>
 			</li>
 			<li>
 				<a href="${pageContext.request.contextPath}/clientes/listaadmin"><fmt:message key="logado.admin.userManagement" /></a>
         	</li>
+            <li>
+                <a href="${pageContext.request.contextPath}/logout.jsp"><fmt:message key="logado.admin.logout" /></a>
+            </li>
         </ul>
 		
     </body>

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import br.ufscar.dc.dsw.Usuario;
 import br.ufscar.dc.dsw.Locadora;
+import br.ufscar.dc.dsw.Locacao;
 
 public class UsuarioDAO extends GenericDAO {
 
@@ -16,7 +17,7 @@ public class UsuarioDAO extends GenericDAO {
         String sql = "INSERT INTO Usuario (nome, login, senha, papel) VALUES (?, ?, ?, ?)";
         try {
             Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);;    
+            PreparedStatement statement = conn.prepareStatement(sql);   
             statement = conn.prepareStatement(sql);
             statement.setString(1, usuario.getNome());
             statement.setString(2, usuario.getLogin());
@@ -34,13 +35,30 @@ public class UsuarioDAO extends GenericDAO {
         String sql = "INSERT INTO Usuario (nome, login, senha, papel, cidade) VALUES (?, ?, ?, ?, ?)";
         try {
             Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);;    
+            PreparedStatement statement = conn.prepareStatement(sql); 
             statement = conn.prepareStatement(sql);
             statement.setString(1, usuario.getNome());
             statement.setString(2, usuario.getLogin());
             statement.setString(3, usuario.getSenha());
             statement.setString(4, usuario.getPapel());
             statement.setString(5, usuario.getCidade());
+            statement.executeUpdate();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void insertLocacao(Locacao locacao) {    
+        String sql = "INSERT INTO Locacao (cliente, locadora, data) VALUES (?, ?, ?)";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);    
+            statement = conn.prepareStatement(sql);
+            statement.setString(1, locacao.getCliente());
+            statement.setString(2, locacao.getLocadora());
+            statement.setString(3, locacao.getData());
             statement.executeUpdate();
             statement.close();
             conn.close();
@@ -123,6 +141,30 @@ public class UsuarioDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
         return listaUsuarios;
+    }
+
+    public List<Locacao> getAllLocacoes(String usuario) {   
+        List<Locacao> listaLocacoes = new ArrayList<>();
+        String sql = "SELECT * from Locacao u WHERE cliente = ?";
+        try {
+             Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, usuario);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String locadora = resultSet.getString("locadora");
+                String data = resultSet.getString("data");
+                Locacao locacao = new Locacao(id, usuario, locadora, data);
+                listaLocacoes.add(locacao);
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaLocacoes;
     }
     
     public void delete(Usuario usuario) {

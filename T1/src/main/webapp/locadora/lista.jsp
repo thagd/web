@@ -12,7 +12,7 @@
 		String contextPath = request.getContextPath().replace("/", "");
 	%>
 	<div class="container-page">
-		<form action="${pageContext.request.contextPath}/locadoras/listaCidade" method="post">
+		<form align="center" action="${pageContext.request.contextPath}/locadoras/listaCidade" method="post">
 			<label for="cidade">Cidade</label>
 			<input type="text" id="cidade" name="cidade" required size="30" maxlength="30"/>
 			<input type="submit" value="Buscar" />

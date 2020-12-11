@@ -60,6 +60,21 @@ public class ClienteController extends HttpServlet {
                 case "/locacoes":
                 	lista_locacoes(request, response);
                     break;
+                case "/cadastrolocacao":
+                	apresentaFormCadastroLocacao(request, response);
+                    break;
+                case "/insercaoLocacao":
+                	insere_locacao(request, response);
+                    break;
+                case "/edicaolocacao":
+                	apresentaFormEdicaoLocacao(request, response);
+                    break;
+                case "/atualizacaoLocacao":
+                	atualize_locacao(request, response);
+                	break;
+                case "/remocaolocacao":
+                	remove_locacao(request, response);
+                    break;
                 default:
                 	lista_admin(request, response);
             }
@@ -85,10 +100,28 @@ public class ClienteController extends HttpServlet {
         }
         return clientes;
     }
+
+    private Map<Long, String> getLocacoes(String cliente) {
+        Map <Long,String> locacoes = new HashMap<>();
+        for (Locacao locacao: new UsuarioDAO().getAllLocacoes(cliente)) {
+            locacoes.put(locacao.getId(), locacao.getLocadora());
+        }
+        return locacoes;
+    }
     
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("clientes", getClientes());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/formulario.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void apresentaFormCadastroLocacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
+        String cliente = usuario.getLogin();
+        request.setAttribute("locacoes", getLocacoes(cliente));
+        List<Usuario> listaLocadoras = dao.getAllLocadoras();
+        request.setAttribute("listaLocadoras", listaLocadoras);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/formularioLocacoes.jsp");
         dispatcher.forward(request, response);
     }
     
@@ -98,11 +131,24 @@ public class ClienteController extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        String papel = "USER";
+        String papel = "CLIENTE";
         
         Usuario cliente = new Usuario(nome, email, senha, papel);
         dao.insert(cliente);
         response.sendRedirect("listaadmin");
+    }
+
+    private void insere_locacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
+        String cliente = usuario.getLogin();
+        String locadora = request.getParameter("locadora");
+        String data = request.getParameter("data");
+        
+        Locacao locacao = new Locacao(cliente, locadora, data);
+        dao.insertLocacao(locacao);
+        response.sendRedirect("locacoes");
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -119,11 +165,34 @@ public class ClienteController extends HttpServlet {
         response.sendRedirect("listaadmin");
     }
 
+    private void atualize_locacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        Long id = Long.parseLong(request.getParameter("id"));
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
+        String cliente = usuario.getLogin();
+        String locadora = request.getParameter("locadora");
+        String data = request.getParameter("data");
+        
+        Locacao locacao = new Locacao(id, cliente, locadora, data);
+        dao.updateLocacao(locacao);
+        response.sendRedirect("locacoes");
+    }
+
     private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
         Usuario cliente = dao.getbyID(id);
         request.setAttribute("cliente", cliente);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/formulario.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void apresentaFormEdicaoLocacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        Locacao locacao = dao.getLocacaoByID(id);
+        request.setAttribute("locacao", locacao);
+        List<Usuario> listaLocadoras = dao.getAllLocadoras();
+        request.setAttribute("listaLocadoras", listaLocadoras);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/formularioLocacoes.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -133,6 +202,14 @@ public class ClienteController extends HttpServlet {
         Usuario cliente = new Usuario(id);
         dao.delete(cliente);
         response.sendRedirect("listaadmin");
+    }
+
+    private void remove_locacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+
+        Locacao locacao = new Locacao(id);
+        dao.deleteLocacao(locacao);
+        response.sendRedirect("locacoes");
     }
 
     private void lista_locacoes(HttpServletRequest request, HttpServletResponse response) 

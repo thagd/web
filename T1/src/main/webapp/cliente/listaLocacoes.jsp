@@ -13,8 +13,8 @@ String contextPath = request.getContextPath().replace("/", "");
 	<div align="center">
 		<h1>Gerenciamento de Locacoes</h1>
 		<h2>
-			<a href="${pageContext.request.contextPath}/clientes/">Menu User</a> &nbsp;&nbsp;&nbsp; 
-			<a href="${pageContext.request.contextPath}/clientes/cadastro">Adicione Nova Locação</a>
+			<a href="${pageContext.request.contextPath}/usuario/">Menu User</a> &nbsp;&nbsp;&nbsp; 
+			<a href="${pageContext.request.contextPath}/clientes/cadastrolocacao">Adicione Nova Locação</a>
 		</h2>
 	</div>
 	<div align="center">
@@ -28,9 +28,9 @@ String contextPath = request.getContextPath().replace("/", "");
 				<tr>
 					<td>${locacao.locadora}</td>
 					<td>${locacao.data}</td>
-					<td><a href="${pageContext.request.contextPath}/clientes/edicao?id=${cliente.id}">Edição</a>
+					<td><a href="${pageContext.request.contextPath}/clientes/edicaolocacao?id=${locacao.id}">Edição</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; 
-						<a href="${pageContext.request.contextPath}/clientes/remocao?id=${cliente.id}" onclick="return confirm('Tem certeza de que deseja excluir este item?');">Remoção </a></td>
+						<a href="${pageContext.request.contextPath}/clientes/remocaolocacao?id=${locacao.id}" onclick="return confirm('Tem certeza de que deseja excluir este item?');">Remoção </a></td>
 				</tr>
 			</c:forEach>
 		</table>

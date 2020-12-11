@@ -18,6 +18,9 @@
             <li>
                 <a href="${pageContext.request.contextPath}/logout.jsp"><fmt:message key="logado.locadora.logout" /></a>
             </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/clientes/locacoes">Locações</a>
+            </li>
         </ul>
         </div>
     </body>

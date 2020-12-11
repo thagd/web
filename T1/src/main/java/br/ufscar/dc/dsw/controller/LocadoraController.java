@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufscar.dc.dsw.Usuario;
+import br.ufscar.dc.dsw.Locacao;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
 
 @WebServlet(name = "Index", urlPatterns = { "/index.jsp", "/locadoras/*" })
@@ -61,6 +62,9 @@ public class LocadoraController extends HttpServlet {
                 	break;
                 case "/edicao":
                 	apresentaFormEdicao(request, response);
+                case "/locacoes":
+                	lista_locacoes(request, response);
+                    break;
                 default:
                 	lista(request, response);
             }
@@ -153,5 +157,15 @@ public class LocadoraController extends HttpServlet {
         dao.delete(livro);
         response.sendRedirect("listaadmin");
     }
-    
+
+    private void lista_locacoes(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
+
+        Usuario usuario = (Usuario)request.getSession().getAttribute("usuarioLogado");
+        String login = usuario.getLogin();
+        List<Locacao> listaLocacoes = dao.getAllLocacoesLocadora(login);
+        request.setAttribute("listaLocacoes", listaLocacoes);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/locadora/listaLocacoes.jsp");
+        dispatcher.forward(request, response);
+    }
 }

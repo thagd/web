@@ -143,19 +143,43 @@ public class UsuarioDAO extends GenericDAO {
         return listaUsuarios;
     }
 
-    public List<Locacao> getAllLocacoes(String usuario) {   
+    public List<Locacao> getAllLocacoes(String cliente) {   
         List<Locacao> listaLocacoes = new ArrayList<>();
         String sql = "SELECT * from Locacao u WHERE cliente = ?";
         try {
              Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, usuario);
+            statement.setString(1, cliente);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
                 String locadora = resultSet.getString("locadora");
                 String data = resultSet.getString("data");
-                Locacao locacao = new Locacao(id, usuario, locadora, data);
+                Locacao locacao = new Locacao(id, cliente, locadora, data);
+                listaLocacoes.add(locacao);
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaLocacoes;
+    }
+
+    public List<Locacao> getAllLocacoesLocadora(String locadora) {   
+        List<Locacao> listaLocacoes = new ArrayList<>();
+        String sql = "SELECT * from Locacao u WHERE locadora = ?";
+        try {
+             Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, locadora);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String cliente = resultSet.getString("cliente");
+                String data = resultSet.getString("data");
+                Locacao locacao = new Locacao(id, cliente, locadora, data);
                 listaLocacoes.add(locacao);
             }
             resultSet.close();
@@ -173,6 +197,19 @@ public class UsuarioDAO extends GenericDAO {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setLong(1, usuario.getId());
+            statement.executeUpdate();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+        }
+    }
+
+    public void deleteLocacao(Locacao locacao) {
+        String sql = "DELETE FROM Locacao where id = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setLong(1, locacao.getId());
             statement.executeUpdate();
             statement.close();
             conn.close();
@@ -218,6 +255,24 @@ public class UsuarioDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public void updateLocacao(Locacao locacao) {
+        String sql = "UPDATE Locacao SET cliente = ?, locadora = ?, data = ? WHERE id = ?";
+    
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, locacao.getCliente());
+            statement.setString(2, locacao.getLocadora());
+            statement.setString(3, locacao.getData());
+            statement.setLong(4, locacao.getId());
+            statement.executeUpdate();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     
     public Usuario getbyID(Long id) {
         Usuario usuario = null;
@@ -241,6 +296,29 @@ public class UsuarioDAO extends GenericDAO {
             throw new RuntimeException(e);
         }
         return usuario;
+    }
+
+    public Locacao getLocacaoByID(Long id) {
+        Locacao locacao = null;
+        String sql = "SELECT * from Locacao WHERE id = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String cliente = resultSet.getString("cliente");
+                String locadora = resultSet.getString("locadora");
+                String data = resultSet.getString("data");
+                locacao = new Locacao(cliente, locadora, data);
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return locacao;
     }
     
     public Usuario getbyIDLocadora(Long id) {

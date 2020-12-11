@@ -38,7 +38,7 @@ public class UsuarioController extends HttpServlet {
             dispatcher.forward(request, response);
     	} else {
     		erros.add("Acesso não autorizado!");
-    		erros.add("Apenas Papel [USER] tem acesso a essa página");
+    		erros.add("Apenas Papel [CLIENTE] ou [LOCADORA] tem acesso a essa página");
     		request.setAttribute("mensagens", erros);
     		RequestDispatcher rd = request.getRequestDispatcher("/noAuth.jsp");
     		rd.forward(request, response);

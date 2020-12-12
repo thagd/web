@@ -131,44 +131,44 @@ Para criar o banco de dados, as tabelas e popular com algumas inserções, execu
 ## CheckList Requisitos
 * **Página inicial**
 	* **R3 (Lista de todas as locadoras)<br>**
-		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 		Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (50%) e Thais (50%)
 	* **R4 (Lista de locadoras por cidade)<br>**
-		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 		Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (100%) e Thais (0%)
 	* **Login**
 
 * **Página login**
 	* **Página cliente**
 		* **R5 (Locação bicicleta)**<br>
-			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 			Divisão na implementação da funcionalidade: Ariane (50%), Sabrina (0%) e Thais (50%)
 		* **R6 (Listagem de todas as locações do cliente)<br>**
-			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 			Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (0%) e Thais (100%)			
 		* **R7 (Não permite locações de um mesmo cliente ou mesma locadora em um mesmo dia/horário)<br>**
-			() Implementado ( ) Parcialmente implementado (X) Não implementado
+			() Implementado ( ) Parcialmente implementado (X) Não implementado<br>
 			Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (0%) e Thais (0%)
 
 	* **Página admin**
 		* **R1 (CRUD de cliente)<br>**
-			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 			Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (50%) e Thais (50%)
 		* **R2 (CRUD de locadoras)<br>**
-			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 			Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (50%) e Thais (50%)
 	* **Página locadora**
 		* **R8 (Listagem de todas as locações)<br>**
-			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 			Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (0%) e Thais (100%)
 
 * **Geral (geral)**
 	* **internacionalização (português e inglês)<br>**
-		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado<br>
 		Divisão na implementação da funcionalidade: Ariane (100%), Sabrina (0%) e Thais (0%)
 	* **tratar erros (cadastro duplicado, problema técnico, etc)<br>**
-		( ) Implementado (X) Parcialmente implementado ( ) Não implementado
+		( ) Implementado (X) Parcialmente implementado ( ) Não implementado<br>
 		Divisão na implementação da funcionalidade: Ariane (100%), Sabrina (0%) e Thais (0%)
 	* **página de erros amigável e registrando erro no console.<br>**
-		() Implementado (X) Parcialmente implementado ( ) Não implementado
+		() Implementado (X) Parcialmente implementado ( ) Não implementado<br>
 		Divisão na implementação da funcionalidade: Ariane (50%), Sabrina (0%) e Thais (50%)

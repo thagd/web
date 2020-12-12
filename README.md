@@ -1,13 +1,13 @@
-#Vá de Bike - Locadora de Bicicletas
+# Vá de Bike - Locadora de Bicicletas
 A Vá de Bike é uma aplicação web para cadastramento de locação de bicicletas, realizado como trabalho 1 na materia de Desenvolvimento Web 1.
 
-##Criação do Banco de dados
-Nome do banco de dados: Bicicletas
+## Criação do Banco de dados
+Nome do banco de dados: Bicicletas<br>
 Tabelas existentes: Usuario e Locadora
 
 Para criar o banco de dados, as tabelas e popular com algumas inserções, execute o arquivo /db/biciletas.sql dentro de um console mysql.
 
-##CheckList Requisitos
+## CheckList Requisitos
 * Página inicial
 	* R3 (Lista de todas as locadoras)
 		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado

@@ -1,26 +1,54 @@
 <h1>Vá de Bike - Locadora de Bicicletas</h1>
-A Vá de Bike conta com um site com os seguintes requisitos:
+A Vá de Bike é uma aplicação web para cadastramento de locação de bicicletas, realizado como trabalho 1 na materia de Desenvolvimento Web 1.
 
+<h3>Criação do Banco de dados</h3>
+Nome do banco de dados: Bicicletas
+Tabelas existentes: Usuario e Locadora
+
+Para criar o banco de dados, as tabelas e popular com algumas inserções, execute o arquivo /db/biciletas.sql dentro de um console mysql.
+
+<h3>CheckList Requisitos</h3>
 - Página inicial
 	- R3 (Lista de todas as locadoras)
+		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+		Divisão na implementação da funcionalidade: Membro1 (33%), Membro2 (33%) e Membro3 (33%)
 	- R4 (Lista de locadoras por cidade)
+		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+		Divisão na implementação da funcionalidade: Membro1 (33%), Membro2 (33%) e Membro3 (33%)
 	- Login
 
 - Página login
+	- Página cliente
+		- R5 (Locação bicicleta)
+			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+			Divisão na implementação da funcionalidade: Membro1 (33%), Membro2 (33%) e Membro3 (33%)
+		- R6 (Listagem de todas as locações do cliente)
+			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+			Divisão na implementação da funcionalidade: Membro1 (33%), Membro2 (33%) e Membro3 (33%)
+		- R7 (Não permite locações de um mesmo cliente ou mesma locadora em um mesmo dia/horário) 
+			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+			Divisão na implementação da funcionalidade: Membro1 (33%), Membro2 (33%) e Membro3 (33%)
 
-- Página cliente
-	- R5 (Locação bicicleta)
-	- R6 (Listagem de todas as locações do cliente)
-	- R7 (Não permite locações de um mesmo cliente ou mesma locadora em um mesmo dia/horário) 
+	- Página admin
+		- R1 (CRUD de cliente)
+			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+			Divisão na implementação da funcionalidade: Membro1 (33%), Membro2 (33%) e Membro3 (33%)
+		- R2 (CRUD de locadoras)
+			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+			Divisão na implementação da funcionalidade: Membro1 (33%), Membro2 (33%) e Membro3 (33%)
 
-- Página admin
-	- R1 (CRUD de cliente)
-	- R2 (CRUD de locadoras)
-
-- Página locadora
-	- R8 (Listagem de todas as locações)
+	- Página locadora
+		- R8 (Listagem de todas as locações)
+			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+			Divisão na implementação da funcionalidade: Membro1 (33%), Membro2 (33%) e Membro3 (33%)
 
 - Geral (geral)
 	- internacionalização (português e inglês)
+		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+		Divisão na implementação da funcionalidade: Membro1 (33%), Membro2 (33%) e Membro3 (33%)
 	- tratar erros (cadastro duplicado, problema técnico, etc) 
+		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+		Divisão na implementação da funcionalidade: Membro1 (33%), Membro2 (33%) e Membro3 (33%)
 	- página de erros amigável e registrando erro no console.
+		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+		Divisão na implementação da funcionalidade: Membro1 (33%), Membro2 (33%) e Membro3 (33%)

@@ -129,7 +129,7 @@ Para criar o banco de dados, as tabelas e popular com algumas inserções, execu
 
 <br><br>
 ## CheckList Requisitos
-* Página inicial
+* **Página inicial**
 	* **R3 (Lista de todas as locadoras)<br>**
 		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
 		Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (50%) e Thais (50%)
@@ -138,7 +138,7 @@ Para criar o banco de dados, as tabelas e popular com algumas inserções, execu
 		Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (100%) e Thais (0%)
 	* **Login**
 
-* Página login
+* **Página login**
 	* **Página cliente**
 		* **R5 (Locação bicicleta)**<br>
 			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
@@ -146,27 +146,27 @@ Para criar o banco de dados, as tabelas e popular com algumas inserções, execu
 		* **R6 (Listagem de todas as locações do cliente)<br>**
 			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
 			Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (0%) e Thais (100%)			
-		* **R7 (Não permite locações de um mesmo cliente ou mesma locadora em um mesmo dia/horário)<br> **
+		* **R7 (Não permite locações de um mesmo cliente ou mesma locadora em um mesmo dia/horário)<br>**
 			() Implementado ( ) Parcialmente implementado (X) Não implementado
 			Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (0%) e Thais (0%)
 
-	* Página admin
+	* **Página admin**
 		* **R1 (CRUD de cliente)<br>**
 			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
 			Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (50%) e Thais (50%)
 		* **R2 (CRUD de locadoras)<br>**
 			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
 			Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (50%) e Thais (50%)
-	* Página locadora
+	* **Página locadora**
 		* **R8 (Listagem de todas as locações)<br>**
 			(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
 			Divisão na implementação da funcionalidade: Ariane (0%), Sabrina (0%) e Thais (100%)
 
-* Geral (geral)
+* **Geral (geral)**
 	* **internacionalização (português e inglês)<br>**
 		(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
 		Divisão na implementação da funcionalidade: Ariane (100%), Sabrina (0%) e Thais (0%)
-	* **tratar erros (cadastro duplicado, problema técnico, etc)<br> **
+	* **tratar erros (cadastro duplicado, problema técnico, etc)<br>**
 		( ) Implementado (X) Parcialmente implementado ( ) Não implementado
 		Divisão na implementação da funcionalidade: Ariane (100%), Sabrina (0%) e Thais (0%)
 	* **página de erros amigável e registrando erro no console.<br>**

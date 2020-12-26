@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @SuppressWarnings("serial")
 @Entity
@@ -14,12 +15,15 @@ public class Locacao extends AbstractEntity<Long> {
 	@Column(nullable = false, length = 60)
 	private String cliente;
 	
-	@Column(nullable = false, unique = true, length = 60)
+	@NotBlank(message = "{NotBlank.locacao.locadora}")
+	@Column(nullable = false, length = 60)
 	private String locadora;
 	
+	@NotBlank(message = "{NotBlank.locacao.data}")
 	@Column(nullable = false, length = 10)
 	private String data;
 	
+	@NotBlank(message = "{NotBlank.locacao.horario}")
 	@Column(nullable = false, length = 8)
 	private String horario;
 

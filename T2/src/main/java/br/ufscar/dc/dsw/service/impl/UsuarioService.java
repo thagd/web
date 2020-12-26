@@ -34,4 +34,14 @@ public class UsuarioService implements IUsuarioService {
 	public List<Usuario> buscarTodos() {
 		return dao.findAll();
 	}
+
+	@Transactional(readOnly = true)
+	public List<Usuario> buscarTodosRole(String role) {
+		return dao.findAllRole(role);
+	}
+
+	@Transactional(readOnly = true)
+	public List<Usuario> buscarTodosCidade(String cidade) {
+		return dao.findAllCidade(cidade);
+	}
 }

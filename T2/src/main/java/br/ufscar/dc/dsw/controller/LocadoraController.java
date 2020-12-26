@@ -31,17 +31,16 @@ public class LocadoraController {
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
-		model.addAttribute("locadoras", service.buscarTodos());
+		String role = "ROLE_LOCADORA";
+		model.addAttribute("locadoras", service.buscarTodosRole(role));
 		return "locadora/lista";
 	}
 
-/*
     @GetMapping("/listar-cidade")
-	public String listar_cidade(ModelMap model) {
-		model.addAttribute("locadoras", service.buscarTodos(String cidade));
+	public String listar_cidade(String cidade, ModelMap model) {
+		model.addAttribute("locadoras", service.buscarTodosCidade(cidade));
 		return "locadora/lista";
 	}
-	*/
 	
 	@PostMapping("/salvar")
 	public String salvar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attr) {
@@ -51,7 +50,7 @@ public class LocadoraController {
 		}
 		
 		usuario.setSenha(encoder.encode(usuario.getSenha()));
-		usuario.setRole("ROLE_ADMIN");
+		usuario.setRole("ROLE_LOCADORA");
 
 		service.salvar(usuario);
 		attr.addFlashAttribute("sucess", "Locadora inserida com sucesso.");
@@ -71,7 +70,7 @@ public class LocadoraController {
 			return "locadora/cadastro";
 		}
 
-		usuario.setRole("ROLE_ADMIN");
+		usuario.setRole("ROLE_LOCADORA");
 
 		service.salvar(usuario);
 		attr.addFlashAttribute("sucess", "Locadora editada com sucesso.");

@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.dao.ILocacaoDAO;
+import br.ufscar.dc.dsw.domain.Locacao;
 
 @SpringBootApplication
 public class BicicletasMvcApplication {
@@ -19,7 +21,7 @@ public class BicicletasMvcApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, BCryptPasswordEncoder encoder) {
+	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, BCryptPasswordEncoder encoder, ILocacaoDAO locacaoDAO) {
 		return (args) -> {
 			
 			Usuario u1 = new Usuario();
@@ -43,6 +45,13 @@ public class BicicletasMvcApplication {
             u3.setEmail("locadora@locadora");
 			u3.setRole("ROLE_LOCADORA");
 			usuarioDAO.save(u3);
+
+			Locacao l1 = new Locacao();
+			l1.setCliente("cliente@cliente");
+			l1.setLocadora("locadora@locadora");
+			l1.setData("2020-12-23");
+			l1.setHorario("12:00");
+			locacaoDAO.save(l1);
 		};
 	}
 }

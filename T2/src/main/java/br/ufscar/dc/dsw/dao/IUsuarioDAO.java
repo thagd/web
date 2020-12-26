@@ -12,6 +12,12 @@ public interface IUsuarioDAO extends CrudRepository<Usuario, Long>{
 	Usuario findById(long id);
 	Usuario save (Usuario usuario);
 
-	@Query("SELECT u FROM Usuario u WHERE u.nome = :nome")
-    public Usuario getUserByUsername(@Param("nome") String nome);
+	@Query("SELECT u FROM Usuario u WHERE u.email = :email")
+	public Usuario getUserByUsername(@Param("email") String email);
+	
+	@Query("SELECT l FROM Usuario l where l.role = :role") 
+	List<Usuario> findAllRole(@Param("role") String role);
+	
+	@Query("SELECT l FROM Usuario l where l.role = ROLE_LOCADORA AND l.cidade = :cidade") 
+    List<Usuario> findAllCidade(@Param("cidade") String cidade);
 }

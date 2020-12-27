@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import java.util.List;
+import java.util.ArrayList;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -105,9 +106,29 @@ public class LocadoraController {
 		return listar(model);
 	}
 
+	private List<Usuario> removeRepeteco(List<Usuario> usuarios) {
+		List<Usuario> newUsuarios = new ArrayList<Usuario>();
+
+		for(Usuario usuario : usuarios){
+			boolean tem = false;
+
+			for(Usuario newUsuario : newUsuarios){
+				if(usuario.getCidade().equals(newUsuario.getCidade())){
+					tem = true;
+				}
+			}
+
+			if(!tem){
+				newUsuarios.add(usuario);
+			}
+		}
+		
+		return newUsuarios;
+	}
+
 	@ModelAttribute("locadorasCidade")
 	public List<Usuario> listaLocadoras() {
 		String role = "ROLE_LOCADORA";
-		return service.buscarTodosRole(role);
+		return this.removeRepeteco(service.buscarTodosRole(role));
 	}
 }

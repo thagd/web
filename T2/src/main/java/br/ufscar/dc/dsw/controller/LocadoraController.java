@@ -1,5 +1,6 @@
 package br.ufscar.dc.dsw.controller;
 
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -7,10 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import br.ufscar.dc.dsw.domain.Endereco;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.IUsuarioService;
 
@@ -36,10 +40,20 @@ public class LocadoraController {
 		return "locadora/lista";
 	}
 
-    @GetMapping("/listar-cidade")
-	public String listar_cidade(String cidade, ModelMap model) {
-		model.addAttribute("locadoras", service.buscarTodosCidade(cidade));
-		return "locadora/lista";
+	@GetMapping("/procurar")
+	public String procurar(ModelMap model) {
+		model.addAttribute("endereco", new Endereco());
+		return "locadora/lista-cidade";
+	}
+
+	@PostMapping("/listar-cidade")
+	public String listar_cidade(Endereco endereco, BindingResult result, ModelMap model) {
+		if (result.hasErrors()) {
+			return "locadora/listar-cidade";
+		}
+
+		model.addAttribute("locadoras", service.buscarTodosCidade(endereco.getCidade()));
+		return "locadora/lista-cidade";
 	}
 	
 	@PostMapping("/salvar")
@@ -89,5 +103,11 @@ public class LocadoraController {
 		service.excluir(id);
 		model.addAttribute("sucess", "Locadora excluída com sucesso.");
 		return listar(model);
+	}
+
+	@ModelAttribute("locadorasCidade")
+	public List<Usuario> listaLocadoras() {
+		String role = "ROLE_LOCADORA";
+		return service.buscarTodosRole(role);
 	}
 }

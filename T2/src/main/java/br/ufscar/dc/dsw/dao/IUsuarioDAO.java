@@ -18,6 +18,6 @@ public interface IUsuarioDAO extends CrudRepository<Usuario, Long>{
 	@Query("SELECT l FROM Usuario l where l.role = :role") 
 	List<Usuario> findAllRole(@Param("role") String role);
 	
-	@Query("SELECT l FROM Usuario l where l.role = ROLE_LOCADORA AND l.cidade = :cidade") 
+	@Query("SELECT l FROM Usuario l where l.role = 'ROLE_LOCADORA' AND l.cidade = :cidade") 
     List<Usuario> findAllCidade(@Param("cidade") String cidade);
 }

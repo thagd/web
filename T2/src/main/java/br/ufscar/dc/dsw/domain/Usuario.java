@@ -6,12 +6,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.validation.constraints.NotBlank;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Usuario")
-public class Usuario extends AbstractEntity<Long> {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Usuario extends AbstractEntity<Long> {
 	@NotBlank(message = "{NotBlank.usuario.nome}")
 	@Column(nullable = false, length = 60)
 	private String nome;
@@ -26,9 +29,6 @@ public class Usuario extends AbstractEntity<Long> {
 	
     @Column(nullable = false, length = 20)
     private String role;
-
-	@Column(length = 30)
-	private String cidade;
 
 	public String getNome() {
 		return nome;
@@ -56,12 +56,5 @@ public class Usuario extends AbstractEntity<Long> {
 	}
 	public void setRole(String role) {
 		this.role = role;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
 	}
 }

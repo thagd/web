@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufscar.dc.dsw.domain.Locacao;
+import br.ufscar.dc.dsw.domain.Locadora;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.ILocacaoService;
-import br.ufscar.dc.dsw.service.spec.IUsuarioService;
+import br.ufscar.dc.dsw.service.spec.ILocadoraService;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
 
 @Controller
@@ -27,7 +28,7 @@ public class LocacaoController {
 	private ILocacaoService service;
 
 	@Autowired
-	private IUsuarioService usuarioService;
+	private ILocadoraService locadoraService;
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Locacao locacao) {
@@ -68,8 +69,7 @@ public class LocacaoController {
 	}
 
 	@ModelAttribute("locadoras")
-	public List<Usuario> listaLocadoras() {
-		String role = "ROLE_LOCADORA";
-		return usuarioService.buscarTodosRole(role);
+	public List<Locadora> listaLocadoras() {
+		return locadoraService.buscarTodos();
 	}
 }

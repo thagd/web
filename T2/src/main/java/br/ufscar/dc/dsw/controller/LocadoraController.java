@@ -16,28 +16,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Endereco;
-import br.ufscar.dc.dsw.domain.Usuario;
-import br.ufscar.dc.dsw.service.spec.IUsuarioService;
+import br.ufscar.dc.dsw.domain.Locadora;
+import br.ufscar.dc.dsw.service.spec.ILocadoraService;
 
 @Controller
 @RequestMapping("/locadoras")
 public class LocadoraController {
 	
 	@Autowired
-	private IUsuarioService service;
+	private ILocadoraService service;
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
 	@GetMapping("/cadastrar")
-	public String cadastrar(Usuario usuario) {
+	public String cadastrar(Locadora locadora) {
 		return "locadora/cadastro";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
-		String role = "ROLE_LOCADORA";
-		model.addAttribute("locadoras", service.buscarTodosRole(role));
+		model.addAttribute("locadoras", service.buscarTodos());
 		return "locadora/lista";
 	}
 
@@ -53,41 +52,41 @@ public class LocadoraController {
 			return "locadora/listar-cidade";
 		}
 
-		model.addAttribute("locadoras", service.buscarTodosCidade(endereco.getCidade()));
+		model.addAttribute("locadoras", service.buscarTodosPorCidade(endereco.getCidade()));
 		return "locadora/lista-cidade";
 	}
 	
 	@PostMapping("/salvar")
-	public String salvar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Locadora locadora, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
 			return "locadora/cadastro";
 		}
 		
-		usuario.setSenha(encoder.encode(usuario.getSenha()));
-		usuario.setRole("ROLE_LOCADORA");
+		locadora.setSenha(encoder.encode(locadora.getSenha()));
+		locadora.setRole("ROLE_LOCADORA");
 
-		service.salvar(usuario);
+		service.salvar(locadora);
 		attr.addFlashAttribute("sucess", "Locadora inserida com sucesso.");
 		return "redirect:/locadoras/listar";
 	}
 
     @GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("usuario", service.buscarPorId(id));
+		model.addAttribute("locadora", service.buscarPorId(id));
 		return "locadora/cadastro";
 	}
 	
 	@PostMapping("/editar")
-	public String editar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attr) {
+	public String editar(@Valid Locadora locadora, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
 			return "locadora/cadastro";
 		}
 
-		usuario.setRole("ROLE_LOCADORA");
+		locadora.setRole("ROLE_LOCADORA");
 
-		service.salvar(usuario);
+		service.salvar(locadora);
 		attr.addFlashAttribute("sucess", "Locadora editada com sucesso.");
 		return "redirect:/locadoras/listar";
 	}
@@ -106,29 +105,28 @@ public class LocadoraController {
 		return listar(model);
 	}
 
-	private List<Usuario> removeRepeteco(List<Usuario> usuarios) {
-		List<Usuario> newUsuarios = new ArrayList<Usuario>();
+	private List<Locadora> removeRepeteco(List<Locadora> locadoras) {
+		List<Locadora> newLocadoras = new ArrayList<Locadora>();
 
-		for(Usuario usuario : usuarios){
+		for(Locadora locadora : locadoras){
 			boolean tem = false;
 
-			for(Usuario newUsuario : newUsuarios){
-				if(usuario.getCidade().equals(newUsuario.getCidade())){
+			for(Locadora newLocadora : newLocadoras){
+				if(locadora.getCidade().equals(newLocadora.getCidade())){
 					tem = true;
 				}
 			}
 
 			if(!tem){
-				newUsuarios.add(usuario);
+				newLocadoras.add(locadora);
 			}
 		}
 		
-		return newUsuarios;
+		return newLocadoras;
 	}
 
 	@ModelAttribute("locadorasCidade")
-	public List<Usuario> listaLocadoras() {
-		String role = "ROLE_LOCADORA";
-		return this.removeRepeteco(service.buscarTodosRole(role));
+	public List<Locadora> listaLocadoras() {
+		return this.removeRepeteco(service.buscarTodos());
 	}
 }

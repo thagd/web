@@ -8,8 +8,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import br.ufscar.dc.dsw.dao.IUsuarioDAO;
-import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.dao.IClienteDAO;
+import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.dao.ILocadoraDAO;
+import br.ufscar.dc.dsw.domain.Locadora;
+import br.ufscar.dc.dsw.dao.IAdminDAO;
+import br.ufscar.dc.dsw.domain.Admin;
 import br.ufscar.dc.dsw.dao.ILocacaoDAO;
 import br.ufscar.dc.dsw.domain.Locacao;
 
@@ -21,37 +25,42 @@ public class BicicletasMvcApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, BCryptPasswordEncoder encoder, ILocacaoDAO locacaoDAO) {
+	public CommandLineRunner demo(IClienteDAO clienteDAO, ILocadoraDAO locadoraDAO, IAdminDAO adminDAO, BCryptPasswordEncoder encoder, ILocacaoDAO locacaoDAO) {
 		return (args) -> {
 			
-			Usuario u1 = new Usuario();
-			u1.setNome("admin");
-			u1.setSenha(encoder.encode("admin"));
-            u1.setEmail("admin@admin");
-            u1.setRole("ROLE_ADMIN");
-			usuarioDAO.save(u1);
+			Admin a1 = new Admin();
+			a1.setNome("admin");
+			a1.setSenha(encoder.encode("admin"));
+            a1.setEmail("admin");
+            a1.setRole("ROLE_ADMIN");
+			adminDAO.save(a1);
 
-            Usuario u2 = new Usuario();
-			u2.setNome("cliente");
-			u2.setSenha(encoder.encode("123"));
-            u2.setEmail("cliente@cliente");
-			u2.setRole("ROLE_CLIENTE");
-			usuarioDAO.save(u2);
+            Cliente c1 = new Cliente();
+			c1.setNome("cliente");
+			c1.setSenha(encoder.encode("123"));
+            c1.setEmail("cliente");
+			c1.setRole("ROLE_CLIENTE");
+			c1.setCpf("414.966.658-05");
+			c1.setNascimento("1997-09-25");
+			c1.setTelefone("(17)99614-0380");
+			c1.setSexo("feminino");
+			clienteDAO.save(c1);
 
-            Usuario u3 = new Usuario();
-			u3.setNome("locadora");
-			u3.setSenha(encoder.encode("123"));
-            u3.setCidade("São Carlos");
-            u3.setEmail("locadora@locadora");
-			u3.setRole("ROLE_LOCADORA");
-			usuarioDAO.save(u3);
+            Locadora l1 = new Locadora();
+			l1.setNome("locadora");
+			l1.setSenha(encoder.encode("123"));
+            l1.setEmail("locadora");
+			l1.setRole("ROLE_LOCADORA");
+			l1.setCnpj("12.212.121/2121-21");
+			l1.setCidade("São Carlos");
+			locadoraDAO.save(l1);
 
-			Locacao l1 = new Locacao();
-			l1.setCliente("cliente@cliente");
-			l1.setLocadora("locadora@locadora");
-			l1.setData("2020-12-23");
-			l1.setHorario("12:00");
-			locacaoDAO.save(l1);
+			Locacao l2 = new Locacao();
+			l2.setCliente("cliente");
+			l2.setLocadora("locadora");
+			l2.setData("2020-12-23");
+			l2.setHorario("12:00");
+			locacaoDAO.save(l2);
 		};
 	}
 }

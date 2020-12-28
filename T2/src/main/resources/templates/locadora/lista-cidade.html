@@ -55,7 +55,8 @@
                             <tr>
                                 <th>#</th>
                                 <th th:text="#{usuario.email.label}"></th>
-                                <th th:text="#{usuario.nome.label}"></th>
+								<th th:text="#{usuario.nome.label}"></th>
+								<th th:text="#{usuario.cnpj.label}"></th>
                                 <th th:text="#{usuario.cidade.label}"></th>
                                 <div sec:authorize="hasRole('ROLE_ADMIN')">
                                     <th th:text="#{acao.label}"></th>
@@ -66,7 +67,8 @@
                             <tr th:each="locadora : ${locadoras}">
                                 <td th:text="${locadora.id}"></td>
                                 <td th:text="${locadora.email}"></td>
-                                <td th:text="${locadora.nome}"></td>
+								<td th:text="${locadora.nome}"></td>
+								<td th:text="${locadora.cnpj}"></td>
                                 <td th:text="${locadora.cidade}"></td>
                                 <div sec:authorize="hasRole('ROLE_ADMIN')">
                                     <td colspan="2">

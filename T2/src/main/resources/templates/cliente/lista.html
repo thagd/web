@@ -32,6 +32,10 @@
 							<th>#</th>
 							<th th:text="#{usuario.email.label}"></th>
 							<th th:text="#{usuario.nome.label}"></th>
+							<th th:text="#{usuario.cpf.label}"></th>
+							<th th:text="#{usuario.nascimento.label}"></th>
+							<th th:text="#{usuario.telefone.label}"></th>
+							<th th:text="#{usuario.sexo.label}"></th>
 							<th th:text="#{acao.label}"></th>
 						</tr>
 					</thead>
@@ -40,6 +44,10 @@
 							<td th:text="${cliente.id}"></td>
 							<td th:text="${cliente.email}"></td>
 							<td th:text="${cliente.nome}"></td>
+							<td th:text="${cliente.cpf}"></td>
+							<td th:text="${cliente.nascimento}"></td>
+							<td th:text="${cliente.telefone}"></td>
+							<td th:text="${cliente.sexo}"></td>
 							<td colspan="2">
 								<a class="btn btn-info btn-sm" th:href="@{/clientes/editar/{id} (id=${cliente.id}) }"
 									role="button"> 

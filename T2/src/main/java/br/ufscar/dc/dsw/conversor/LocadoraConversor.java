@@ -4,17 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import br.ufscar.dc.dsw.domain.Usuario;
-import br.ufscar.dc.dsw.service.spec.IUsuarioService;
+import br.ufscar.dc.dsw.domain.Locadora;
+import br.ufscar.dc.dsw.service.spec.ILocadoraService;
 
 @Component
-public class LocadoraConversor implements Converter<String, Usuario>{
+public class LocadoraConversor implements Converter<String, Locadora>{
 
 	@Autowired
-	private IUsuarioService service;
+	private ILocadoraService service;
 	
 	@Override
-	public Usuario convert(String text) {
+	public Locadora convert(String text) {
 		
 		if (text.isEmpty()) {
 		 return null;	

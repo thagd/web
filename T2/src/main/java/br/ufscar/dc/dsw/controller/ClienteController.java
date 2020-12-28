@@ -13,62 +13,61 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.ufscar.dc.dsw.domain.Usuario;
-import br.ufscar.dc.dsw.service.spec.IUsuarioService;
+import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.service.spec.IClienteService;
 
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
 	
 	@Autowired
-	private IUsuarioService service;
+	private IClienteService service;
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
 	@GetMapping("/cadastrar")
-	public String cadastrar(Usuario cliente) {
+	public String cadastrar(Cliente cliente) {
 		return "cliente/cadastro";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
-		String role = "ROLE_CLIENTE";
-		model.addAttribute("clientes",service.buscarTodosRole(role));
+		model.addAttribute("clientes", service.buscarTodos());
 		return "cliente/lista";
 	}
 	
 	@PostMapping("/salvar")
-	public String salvar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
 			return "cliente/cadastro";
 		}
 
-		usuario.setSenha(encoder.encode(usuario.getSenha()));
-		usuario.setRole("ROLE_CLIENTE");
+		cliente.setSenha(encoder.encode(cliente.getSenha()));
+		cliente.setRole("ROLE_CLIENTE");
 		
-		service.salvar(usuario);
+		service.salvar(cliente);
 		attr.addFlashAttribute("sucess", "Cliente inserido com sucesso.");
 		return "redirect:/clientes/listar";
 	}
 	
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
-		model.addAttribute("usuario", service.buscarPorId(id));
+		model.addAttribute("cliente", service.buscarPorId(id));
 		return "cliente/cadastro";
 	}
 	
 	@PostMapping("/editar")
-	public String editar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attr) {
+	public String editar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
 			return "cliente/cadastro";
 		}
 
-		usuario.setRole("ROLE_CLIENTE");
+		cliente.setRole("ROLE_CLIENTE");
 		
-		service.salvar(usuario);
+		service.salvar(cliente);
 		attr.addFlashAttribute("sucess", "Cliente editado com sucesso.");
 		return "redirect:/clientes/listar";
 	}

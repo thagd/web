@@ -34,4 +34,9 @@ public class ClienteService implements IClienteService {
 	public List<Cliente> buscarTodos() {
 		return dao.findAll();
 	}
+
+	@Transactional(readOnly = true)
+	public boolean clienteTemLocacoes(String cliente) {
+		return !dao.verifyLocation(cliente).isEmpty();
+	}
 }

@@ -63,6 +63,12 @@ public class LocacaoController {
 		}
 		
 		locacao.setCliente(this.getUsuario());
+		
+		if (service.verificaLocacao(this.getUsuario(), locacao.getLocadora(), locacao.getHorario(), locacao.getData())) {
+			attr.addFlashAttribute("fail", "Locação não permitida nesta data/horário.");
+			return "redirect:/locacoes/cadastrar";
+		}
+
 		service.salvar(locacao);
 		attr.addFlashAttribute("sucess", "Locação inserida com sucesso.");
 		return "redirect:/locacoes/listar";

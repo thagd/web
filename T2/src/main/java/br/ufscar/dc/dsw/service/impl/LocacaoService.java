@@ -28,4 +28,9 @@ public class LocacaoService implements ILocacaoService {
 	public List<Locacao> buscarTodosLocadora(String locadora) {
 		return dao.findAllByLocadora(locadora);
 	}
+
+	@Transactional(readOnly = true)
+	public boolean verificaLocacao(String cliente, String locadora, String horario, String data) {
+		return !dao.verifyLocation(cliente, locadora, horario, data).isEmpty();
+	}
 }

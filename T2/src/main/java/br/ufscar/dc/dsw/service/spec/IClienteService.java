@@ -8,4 +8,5 @@ public interface IClienteService {
 	void excluir(Long id);
 	Cliente buscarPorId(Long id);
 	List<Cliente> buscarTodos();
+	boolean clienteTemLocacoes(String cliente);
 }

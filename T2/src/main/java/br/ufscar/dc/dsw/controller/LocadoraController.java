@@ -93,15 +93,12 @@ public class LocadoraController {
 	
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
-		/*
-		if (service.locadoraTemLocacoes(id)) {
+		if (service.locadoraTemLocacoes(service.buscarPorId(id).getEmail())) {
 			model.addAttribute("fail", "Locadora não excluída. Possui locações vinculadas.");
 		} else {
 			service.excluir(id);
 			model.addAttribute("sucess", "Locadora excluída com sucesso.");
-		}*/
-		service.excluir(id);
-		model.addAttribute("sucess", "Locadora excluída com sucesso.");
+		}
 		return listar(model);
 	}
 

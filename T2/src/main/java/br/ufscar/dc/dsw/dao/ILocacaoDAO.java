@@ -14,5 +14,8 @@ public interface ILocacaoDAO extends CrudRepository<Locacao, Long>{
 	List<Locacao> findAllByCliente(@Param("cliente") String cliente);
 	
 	@Query("SELECT l FROM Locacao l where l.locadora = :locadora") 
-    List<Locacao> findAllByLocadora(@Param("locadora") String locadora);
+	List<Locacao> findAllByLocadora(@Param("locadora") String locadora);
+	
+	@Query("SELECT l FROM Locacao l where l.data = :data AND l.horario = :horario AND (l.cliente = :cliente OR l.locadora = :locadora)") 
+    List<Locacao> verifyLocation(@Param("cliente") String cliente, @Param("locadora") String locadora, @Param("horario") String horario, @Param("data") String data);
 }

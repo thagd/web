@@ -54,7 +54,7 @@
 
                     <div class="form-group col-md-6">
 						<label th:text="#{locacao.horario.label}" for="horario"></label> 
-						<input type="time" class="form-control" id="data" autofocus="autofocus"
+						<input type="time" class="form-control" id="data" autofocus="autofocus" step="3600"
 							th:field="*{horario}" th:placeholder="#{locacao.horario.label}"
 							th:classappend="${#fields.hasErrors('horario')} ? is-invalid" />
 

@@ -74,8 +74,12 @@ public class ClienteController {
 	
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
-		service.excluir(id);
-		model.addAttribute("sucess", "Cliente excluído com sucesso.");
+		if (service.clienteTemLocacoes(service.buscarPorId(id).getEmail())) {
+			model.addAttribute("fail", "Cliente não excluído. Possui locações vinculadas.");
+		} else {
+			service.excluir(id);
+			model.addAttribute("sucess", "Cliente excluído com sucesso.");
+		}
 		return listar(model);
 	}
 }

@@ -12,4 +12,7 @@ public interface IClienteDAO extends CrudRepository<Cliente, Long>{
 	void deleteById(Long id);
 	Cliente findById(long id);
 	List<Cliente> findAll();
+
+	@Query("SELECT l FROM Cliente l inner join Locacao lc on (lc.cliente = :cliente)") 
+    List<Cliente> verifyLocation(@Param("cliente") String cliente);
 }

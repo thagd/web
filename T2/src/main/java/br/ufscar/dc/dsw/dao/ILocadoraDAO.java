@@ -14,5 +14,8 @@ public interface ILocadoraDAO extends CrudRepository<Locadora, Long>{
 	List<Locadora> findAll();
 	
 	@Query("SELECT l FROM Locadora l inner join Usuario p on (l.id = p.id) AND (l.cidade = :cidade)") 
-    List<Locadora> findAllCity(@Param("cidade") String cidade);
+	List<Locadora> findAllCity(@Param("cidade") String cidade);
+	
+	@Query("SELECT l FROM Locadora l inner join Locacao lc on (lc.locadora = :locadora)") 
+    List<Locadora> verifyLocation(@Param("locadora") String locadora);
 }

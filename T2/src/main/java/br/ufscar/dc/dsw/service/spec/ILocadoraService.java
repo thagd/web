@@ -9,4 +9,5 @@ public interface ILocadoraService {
 	Locadora buscarPorId(Long id);
 	List<Locadora> buscarTodos();
 	List<Locadora> buscarTodosPorCidade(String cidade);
+	boolean locadoraTemLocacoes(String locadora);
 }

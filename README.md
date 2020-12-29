@@ -22,5 +22,5 @@ A Vá de Bike é uma aplicação web para cadastramento de locação de biciclet
 </table>
 
 ###  [Link para o T1](https://github.com/thagd/web/blob/main/T1/CheckList.md)
-###  [Link para o T2](https://github.com/thagd/web/blob/main/T1/CheckList.md)
-###  [Link para o T3](https://github.com/thagd/web/blob/main/T1/CheckList.md)
+###  [Link para o T2](https://github.com/thagd/web/blob/main/T2/CheckList.md)
+###  [Link para o T3](https://github.com/thagd/web/blob/main/T3/CheckList.md)

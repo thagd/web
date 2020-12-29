@@ -1,7 +1,5 @@
 # Vá de Bike - Locadora de Bicicletas
-A Vá de Bike é uma aplicação web para cadastramento de locação de bicicletas, realizado como trabalho 1 na disciplina de Desenvolvimento Web 1.
-
-* *Para visualizar o código atualizado utilize a branch menu*
+A Vá de Bike é uma aplicação web para cadastramento de locação de bicicletas, realizado na disciplina de Desenvolvimento Web 1.
 
 <table>
   <thead>
@@ -24,3 +22,5 @@ A Vá de Bike é uma aplicação web para cadastramento de locação de biciclet
 </table>
 
 ###  [Link para o T1](https://github.com/thagd/web/blob/main/T1/CheckList.md)
+###  [Link para o T2](https://github.com/thagd/web/blob/main/T1/CheckList.md)
+###  [Link para o T3](https://github.com/thagd/web/blob/main/T1/CheckList.md)

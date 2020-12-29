@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<i class="oi oi-caret-right"></i>
+						<span th:text="#{locadora.filtro.label}"></span>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="container" id="listagem">
+
+			<form
+				th:action="@{/locadoras/listar-cidade}" th:object="${endereco}" method="POST">
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<div class="d-flex align-items-center flex-row bd-highlight">
+							<div class="flex-fill bd-highlight">
+								<select id="cidade" class="form-control" th:field="*{cidade}"
+									th:classappend="${#fields.hasErrors('cidade')} ? is-invalid">
+									<option value="">Selecione</option>
+									<option th:each="locadora : ${locadorasCidade}" th:value="${locadora.cidade}"
+										th:text="${locadora.cidade}"></option>
+								</select>
+							</div>
+							<div class="p-1 bd-highlight">
+								<button type="submit" th:text="#{button.procurar.label}"
+									class="btn btn-primary"></button>
+							</div>
+						</div>
+
+						<div class="invalid-feedback">
+							<span th:errors="*{cidade}"></span>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<div th:replace="fragments/alert"></div>
+
+            <div th:if="${endereco.cidade != null}">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th th:text="#{usuario.email.label}"></th>
+								<th th:text="#{usuario.nome.label}"></th>
+								<th th:text="#{usuario.cnpj.label}"></th>
+                                <th th:text="#{usuario.cidade.label}"></th>
+                                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <th th:text="#{acao.label}"></th>
+                                </div>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="locadora : ${locadoras}">
+                                <td th:text="${locadora.id}"></td>
+                                <td th:text="${locadora.email}"></td>
+								<td th:text="${locadora.nome}"></td>
+								<td th:text="${locadora.cnpj}"></td>
+                                <td th:text="${locadora.cidade}"></td>
+                                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <td colspan="2">
+                                        <a class="btn btn-info btn-sm" th:href="@{/locadoras/editar/{id} (id=${locadora.id}) }"
+                                            role="button"> 
+                                            <span class="oi oi-brush" th:title="#{link.editar.label}" aria-hidden="true"> </span>
+                                        </a>
+                                        <button
+                                            th:id="${'btn_locadoras/excluir/' + locadora.id}"
+                                            type="button" class="btn btn-danger btn-sm"
+                                            data-toggle="modal" data-target="#myModal">
+                                            <span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+		</div>
+
+		<div th:replace="fragments/modal :: modal"></div>
+	</section>
+</body>
+</html>

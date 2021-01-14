@@ -46,10 +46,10 @@
 						<tr th:each="locacao : ${locacoes}">
 							<td th:text="${locacao.id}"></td>
 							<div sec:authorize="hasRole('ROLE_CLIENTE')">
-								<td th:text="${locacao.locadora}"></td>
+								<td th:text="${locacao.locadora.nome}"></td>
 							</div>
 							<div sec:authorize="hasRole('ROLE_LOCADORA')">
-								<td th:text="${locacao.cliente}"></td>
+								<td th:text="${locacao.cliente.nome}"></td>
 							</div>
                             <td th:text="${locacao.data}"></td>
                             <td th:text="${locacao.horario}"></td>

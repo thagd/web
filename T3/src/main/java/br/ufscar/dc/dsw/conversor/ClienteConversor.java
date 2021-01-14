@@ -4,23 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import br.ufscar.dc.dsw.domain.Locadora;
-import br.ufscar.dc.dsw.service.spec.ILocadoraService;
+import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.service.spec.IClienteService;
 
 @Component
-public class LocadoraConversor implements Converter<String, Locadora>{
+public class ClienteConversor implements Converter<String, Cliente>{
 
 	@Autowired
-	private ILocadoraService service;
+	private IClienteService service;
 	
 	@Override
-	public Locadora convert(String text) {
+	public Cliente convert(String text) {
 		
 		if (text.isEmpty()) {
 		 return null;	
 		}
 		
-		Long id = Long.valueOf(text);
+		Long id = Long.valueOf(text);	
 		return service.buscarPorId(id);
 	}
 }

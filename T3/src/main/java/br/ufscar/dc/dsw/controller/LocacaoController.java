@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufscar.dc.dsw.domain.Locacao;
 import br.ufscar.dc.dsw.domain.Locadora;
+import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.ILocacaoService;
 import br.ufscar.dc.dsw.service.spec.ILocadoraService;
+import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
 
 @Controller
@@ -29,15 +31,23 @@ public class LocacaoController {
 
 	@Autowired
 	private ILocadoraService locadoraService;
+
+	@Autowired
+	private IClienteService clienteService;
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Locacao locacao) {
 		return "locacao/cadastro";
 	}
 
-	private String getUsuario() {
+	private Cliente getCliente() {
 		UsuarioDetails usuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return usuarioDetails.getUsername();
+		return clienteService.buscarPorId(usuarioDetails.getUsuario().getId());
+	}
+
+	private Locadora getLocadora() {
+		UsuarioDetails usuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return locadoraService.buscarPorId(usuarioDetails.getUsuario().getId());
 	}
 
 	private String getRole() {
@@ -49,9 +59,9 @@ public class LocacaoController {
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		if(this.getRole().equals("ROLE_CLIENTE")){
-			model.addAttribute("locacoes", service.buscarTodosCliente(this.getUsuario()));
+			model.addAttribute("locacoes", service.buscarTodosClienteById(this.getCliente().getId()));
 		} else if(this.getRole().equals("ROLE_LOCADORA")){
-			model.addAttribute("locacoes", service.buscarTodosLocadora(this.getUsuario()));
+			model.addAttribute("locacoes", service.buscarTodosLocadoraById(this.getLocadora().getId()));
 		}
 		return "locacao/lista";
 	}
@@ -62,9 +72,9 @@ public class LocacaoController {
 			return "locacao/cadastro";
 		}
 		
-		locacao.setCliente(this.getUsuario());
+		locacao.setCliente(this.getCliente());
 		
-		if (service.verificaLocacao(this.getUsuario(), locacao.getLocadora(), locacao.getHorario(), locacao.getData())) {
+		if (service.verificaLocacao(locacao.getCliente(), locacao.getLocadora(), locacao.getHorario(), locacao.getData())) {
 			attr.addFlashAttribute("fail", "Locação não permitida nesta data/horário.");
 			return "redirect:/locacoes/cadastrar";
 		}

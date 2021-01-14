@@ -46,6 +46,7 @@ public class LocacaoRestController {
 
     @GetMapping(path = "/locacoes/clientes/{id}")
 	public ResponseEntity<List<Locacao>> listaCliente(@PathVariable("id") long id) {
+		System.out.println(id);
 		List<Locacao> lista = service.buscarTodosClienteById(id);
 		if (lista.isEmpty()) {
 			return ResponseEntity.notFound().build();

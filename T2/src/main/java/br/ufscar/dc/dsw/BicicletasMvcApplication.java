@@ -46,6 +46,28 @@ public class BicicletasMvcApplication {
 			c1.setSexo("feminino");
 			clienteDAO.save(c1);
 
+			Cliente c2 = new Cliente();
+			c2.setNome("cliente 2");
+			c2.setSenha(encoder.encode("123"));
+            c2.setEmail("cliente@cliente");
+			c2.setRole("ROLE_CLIENTE");
+			c2.setCpf("414.966.658-05");
+			c2.setNascimento("1997-09-25");
+			c2.setTelefone("(17)99614-0380");
+			c2.setSexo("feminino");
+			clienteDAO.save(c2);
+
+			Cliente c3 = new Cliente();
+			c3.setNome("cliente 3");
+			c3.setSenha(encoder.encode("123"));
+            c3.setEmail("cliente@teste");
+			c3.setRole("ROLE_CLIENTE");
+			c3.setCpf("414.966.658-05");
+			c3.setNascimento("1997-09-25");
+			c3.setTelefone("(17)99614-0380");
+			c3.setSexo("feminino");
+			clienteDAO.save(c3);
+
             Locadora l1 = new Locadora();
 			l1.setNome("locadora");
 			l1.setSenha(encoder.encode("123"));
@@ -55,12 +77,37 @@ public class BicicletasMvcApplication {
 			l1.setCidade("São Carlos");
 			locadoraDAO.save(l1);
 
-			Locacao l2 = new Locacao();
-			l2.setCliente("cliente");
-			l2.setLocadora("locadora");
-			l2.setData("2020-12-23");
-			l2.setHorario("12:00");
-			locacaoDAO.save(l2);
+			Locadora l2 = new Locadora();
+			l2.setNome("locadora teste");
+			l2.setSenha(encoder.encode("123"));
+            l2.setEmail("locadora@teste");
+			l2.setRole("ROLE_LOCADORA");
+			l2.setCnpj("12.212.121/2121-21");
+			l2.setCidade("São Carlos");
+			locadoraDAO.save(l2);
+
+			Locadora l3 = new Locadora();
+			l3.setNome("locadora da sabs");
+			l3.setSenha(encoder.encode("123"));
+            l3.setEmail("locadora@locadora");
+			l3.setRole("ROLE_LOCADORA");
+			l3.setCnpj("12.212.121/2121-21");
+			l3.setCidade("Rio Preto");
+			locadoraDAO.save(l3);
+
+			Locacao l4 = new Locacao();
+			l4.setCliente("cliente");
+			l4.setLocadora("locadora");
+			l4.setData("2020-12-23");
+			l4.setHorario("12:00");
+			locacaoDAO.save(l4);
+
+			Locacao l5 = new Locacao();
+			l5.setCliente("cliente 3");
+			l5.setLocadora("locadora da sabs");
+			l5.setData("2020-12-23");
+			l5.setHorario("12:00");
+			locacaoDAO.save(l5);
 		};
 	}
 }

@@ -7,8 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @SuppressWarnings("serial")
+@JsonIgnoreProperties(value = { "senha", "role" })
 @Entity
 @Table(name = "Locadora")
 public class Locadora extends Usuario {

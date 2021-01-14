@@ -32,7 +32,7 @@
                         <select id="locadora" class="form-control"
 							th:field="*{locadora}" th:classappend="${#fields.hasErrors('locadora')} ? is-invalid">
 							<option value="">Selecione</option>
-							<option th:each="locadora : ${locadoras}" th:value="${locadora.email}"
+							<option th:each="locadora : ${locadoras}" th:value="${locadora.id}"
 								th:text="${locadora.nome}"></option>
 						</select>
 

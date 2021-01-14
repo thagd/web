@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Usuario extends AbstractEntity<Long> {
+public class Usuario extends AbstractEntity<Long> {
 	@NotBlank(message = "{NotBlank.usuario.nome}")
 	@Column(nullable = false, length = 60)
 	private String nome;

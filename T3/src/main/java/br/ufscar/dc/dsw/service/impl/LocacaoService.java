@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import br.ufscar.dc.dsw.dao.ILocacaoDAO;
 import br.ufscar.dc.dsw.domain.Locacao;
+import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.domain.Locadora;
 import br.ufscar.dc.dsw.service.spec.ILocacaoService;
 
 @Service
@@ -17,16 +19,6 @@ public class LocacaoService implements ILocacaoService {
 	
 	public void salvar(Locacao locacao) {
 		dao.save(locacao);
-	}
-
-	@Transactional(readOnly = true)
-	public List<Locacao> buscarTodosCliente(String cliente) {
-		return dao.findAllByCliente(cliente);
-	}
-
-	@Transactional(readOnly = true)
-	public List<Locacao> buscarTodosLocadora(String locadora) {
-		return dao.findAllByLocadora(locadora);
 	}
 
 	@Transactional(readOnly = true)
@@ -50,7 +42,7 @@ public class LocacaoService implements ILocacaoService {
 	}
 
 	@Transactional(readOnly = true)
-	public boolean verificaLocacao(String cliente, String locadora, String horario, String data) {
+	public boolean verificaLocacao(Cliente cliente, Locadora locadora, String horario, String data) {
 		return !dao.verifyLocation(cliente, locadora, horario, data).isEmpty();
 	}
 }

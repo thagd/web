@@ -8,18 +8,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import br.ufscar.dc.dsw.domain.Locadora;
 import br.ufscar.dc.dsw.domain.Cliente;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Locacao")
-public class Locacao extends AbstractEntity<Long> {	
-	@Column(nullable = false, length = 500)
+public class Locacao extends AbstractEntity<Long> {
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
-	@NotNull(message = "{NotBlank.locacao.locadora}")
-	@Column(nullable = false, length = 500)
+	@ManyToOne
+	@JoinColumn(name = "locadora_id")
 	private Locadora locadora;
 	
 	@NotBlank(message = "{NotBlank.locacao.data}")
